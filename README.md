@@ -1,2 +1,1 @@
-# ScanEcosystem
-The Scan Ecosystem 
+A page for StratoSort.
