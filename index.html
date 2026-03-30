@@ -7,7 +7,8 @@
 <meta name="description" content="A local AI knowledge engine for professionals who work with sensitive documents. Semantic search, document chat, and knowledge graphs — all running on your machine.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -27,6 +28,11 @@ body::after{content:'';position:fixed;inset:0;z-index:10000;pointer-events:none;
 .w{max-width:1180px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
 [data-r]{opacity:0;transform:translateY(48px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 [data-r].on{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  [data-r]{opacity:1;transform:none;transition:none}
+  .hero h1 .ln span,.hero-chip,.hero-sub,.hero-accent,.hero-platforms,.scroll-cue{animation:none!important;opacity:1!important;transform:none!important}
+  .hero h1 .ln{overflow:visible}
+}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(7,12,18,0.6);backdrop-filter:blur(40px) saturate(1.8);-webkit-backdrop-filter:blur(40px) saturate(1.8);border-bottom:1px solid var(--b1)}
@@ -198,14 +204,14 @@ section{padding:180px 0;position:relative}
 .price-name{font-size:12px;color:var(--t2);margin-bottom:20px;letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
 .price-amt{font-size:72px;font-weight:500;letter-spacing:-.05em;margin-bottom:4px;line-height:1}
 .price-per{font-family:var(--mono);font-size:12px;color:var(--t3);margin-bottom:52px;letter-spacing:.04em}
-.price-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin-bottom:52px}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
 .price-list li{font-size:14px;color:var(--t2);display:flex;align-items:baseline;gap:16px;line-height:1.6}
 .price-list li::before{content:'';flex-shrink:0;width:3px;height:3px;background:var(--cyan);border-radius:50%;margin-top:3px}
 .price-btn{display:flex;align-items:center;justify-content:center;width:100%;height:56px;background:var(--gold);color:var(--bg);border:none;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;letter-spacing:.03em;transition:all .25s var(--ease);position:relative;overflow:hidden}
 .price-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 50%);opacity:0;transition:opacity .25s}
 .price-btn:hover{background:var(--gold-hi);transform:translateY(-3px);box-shadow:0 12px 40px rgba(224,160,32,.2),0 0 0 1px rgba(224,160,32,.3)}
 .price-btn:hover::before{opacity:1}
-.price-context{margin-top:32px;padding-top:24px;border-top:1px solid rgba(224,160,32,.06)}
+.price-context{margin-top:24px;padding-top:24px;border-top:1px solid rgba(224,160,32,.06)}
 .price-context p{font-size:11px;color:var(--t3);line-height:1.7;font-family:var(--mono);letter-spacing:.02em;opacity:.6}
 
 /* FILE TYPES */
@@ -419,12 +425,13 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
 </style>
 </head>
 <body>
+<noscript><style>[data-r]{opacity:1!important;transform:none!important}</style></noscript>
 
-<canvas id="mesh"></canvas>
+<canvas id="mesh" aria-hidden="true"></canvas>
 
 <nav>
   <div class="w">
-    <a href="#" class="nav-mark">StratoSort</a>
+    <a href="/" class="nav-mark">StratoSort</a>
     <ul class="nav-r" id="navR">
       <li><a href="#features">Features</a></li>
       <li><a href="#architecture">Architecture</a></li>
@@ -647,7 +654,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
           <div class="ap" data-r data-d="100"><div class="ap-bar"></div><div><h4>Zero network dependency</h4><p>After model download, StratoSort never contacts the internet. No telemetry, no analytics. Disconnect your cable and it works the same.</p></div></div>
           <div class="ap" data-r data-d="200"><div class="ap-bar"></div><div><h4>In-process AI inference</h4><p>LLM inference runs inside the application via node-llama-cpp. No separate server, no API calls, no localhost traffic.</p></div></div>
           <div class="ap" data-r data-d="300"><div class="ap-bar"></div><div><h4>Local vector search</h4><p>Embeddings generated and stored on-device using Orama. Your semantic index is a local file you own.</p></div></div>
-          <div class="ap" data-r data-d="400"><div class="ap-bar"></div><div><h4>Source available</h4><p>The full codebase is published and inspectable. Verify every privacy claim yourself — no trust required.</p></div></div>
         </div>
       </div>
       <div data-r data-d="300">
@@ -731,7 +737,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
             <li>Priority issue support</li>
             <li>Invoice for expense reporting</li>
           </ul>
-          <a href="#" class="price-btn">Get License</a>
           <div class="price-context">
             <p>IDC estimates document challenges cost $10,661 per worker per year. StratoSort costs less than a single hour of that loss.</p>
           </div>
@@ -780,59 +785,80 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
 </footer>
 
 <script>
-// ===== CONSTELLATION MESH — mobile-aware =====
+// ===== CONSTELLATION MESH — viewport buffer + document-space particles (avoids huge clearRect) =====
 (function(){
-  const c=document.getElementById('mesh'),x=c.getContext('2d');
-  let w,h,pts=[],mx=-9e3,my=-9e3;
+  const c=document.getElementById('mesh'),ctx=c.getContext('2d',{alpha:true});
+  if(!ctx)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){c.style.display='none';return;}
+  let vw,vh,dpr=1,pts=[],mx=-9e3,my=-9e3;
   const isMob=window.innerWidth<768;
   const N=isMob?20:50,CD=isMob?120:160,MD=240;
 
-  function rz(){w=c.width=innerWidth;h=c.height=Math.max(document.body.scrollHeight,innerHeight*3)}
-  function init(){rz();pts=Array.from({length:N},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*(isMob?.12:.2),vy:(Math.random()-.5)*(isMob?.12:.2),r:Math.random()*(isMob?.8:1.2)+.3,g:Math.random()<.08}))}
+  function docHeight(){return Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,innerHeight);}
+
+  function sizeCanvas(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    vw=innerWidth;
+    vh=innerHeight;
+    c.width=Math.floor(vw*dpr);
+    c.height=Math.floor(vh*dpr);
+    c.style.width=vw+'px';
+    c.style.height=vh+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  function init(){
+    sizeCanvas();
+    const dh=docHeight();
+    pts=Array.from({length:N},()=>({x:Math.random()*vw,y:Math.random()*dh,vx:(Math.random()-.5)*(isMob?.12:.2),vy:(Math.random()-.5)*(isMob?.12:.2),r:Math.random()*(isMob?.8:1.2)+.3,g:Math.random()<.08}));
+  }
 
   function f(){
-    x.clearRect(0,0,w,h);
-    const sy=scrollY,vt=sy-200,vb=sy+innerHeight+200;
+    ctx.clearRect(0,0,vw,vh);
+    const sy=scrollY;
+    const vt=sy-200,vbDoc=sy+vh+200;
+    const dh=docHeight();
     for(let i=0;i<pts.length;i++){
       const a=pts[i];
       a.x+=a.vx;a.y+=a.vy;
-      if(a.x<0||a.x>w)a.vx*=-1;
-      if(a.y<0||a.y>h)a.vy*=-1;
-      if(a.y<vt||a.y>vb)continue;
+      if(a.x<0||a.x>vw)a.vx*=-1;
+      if(a.y<0||a.y>dh)a.vy*=-1;
+      if(a.y<vt||a.y>vbDoc)continue;
+      const cy=a.y-sy;
       for(let j=i+1;j<pts.length;j++){
         const b=pts[j];
-        if(b.y<vt||b.y>vb)continue;
+        if(b.y<vt||b.y>vbDoc)continue;
         const dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
         if(d<CD){
-          x.beginPath();x.moveTo(a.x,a.y-sy);x.lineTo(b.x,b.y-sy);
-          x.strokeStyle=`rgba(59,160,192,${(1-d/CD)*(isMob?.03:.04)})`;
-          x.lineWidth=.5;x.stroke();
+          ctx.beginPath();ctx.moveTo(a.x,cy);ctx.lineTo(b.x,b.y-sy);
+          ctx.strokeStyle=`rgba(59,160,192,${(1-d/CD)*(isMob?.03:.04)})`;
+          ctx.lineWidth=.5;ctx.stroke();
         }
       }
       if(!isMob){
         const dx2=a.x-mx,dy2=a.y-(my+sy),d2=Math.sqrt(dx2*dx2+dy2*dy2);
         if(d2<MD){
-          x.beginPath();x.moveTo(a.x,a.y-sy);x.lineTo(mx,my);
-          x.strokeStyle=`rgba(224,160,32,${(1-d2/MD)*.1})`;
-          x.lineWidth=.5;x.stroke();
+          ctx.beginPath();ctx.moveTo(a.x,cy);ctx.lineTo(mx,my);
+          ctx.strokeStyle=`rgba(224,160,32,${(1-d2/MD)*.1})`;
+          ctx.lineWidth=.5;ctx.stroke();
         }
       }
-      x.beginPath();x.arc(a.x,a.y-sy,a.r,0,Math.PI*2);
-      x.fillStyle=a.g?'rgba(224,160,32,.35)':'rgba(59,160,192,.18)';
-      x.fill();
+      ctx.beginPath();ctx.arc(a.x,cy,a.r,0,Math.PI*2);
+      ctx.fillStyle=a.g?'rgba(224,160,32,.35)':'rgba(59,160,192,.18)';
+      ctx.fill();
     }
     requestAnimationFrame(f);
   }
 
   let resizeTimer;
-  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{rz()},150)});
+  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(init,150)});
   addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
   addEventListener('mouseleave',()=>{mx=-9e3;my=-9e3});
   init();f();
 })();
 
 // ===== SCROLL REVEAL =====
-const obs=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const d=e.target.getAttribute('data-d');if(d)e.target.style.transitionDelay=d+'ms';e.target.classList.add('on')}})},{threshold:.05,rootMargin:'0px 0px -60px 0px'});
+const obs=new IntersectionObserver(e=>{e.forEach(ent=>{if(ent.isIntersecting){const t=ent.target,d=t.getAttribute('data-d');if(d)t.style.transitionDelay=d+'ms';t.classList.add('on')}})},{threshold:0.06,rootMargin:'0px 0px 100px 0px'});
 document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
 
 // ===== COUNT UP =====
