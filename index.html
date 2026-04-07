@@ -160,14 +160,16 @@ section{padding:180px 0;position:relative}
   border:1px solid var(--b2);
   border-radius:999px;
   padding:6px 10px;
+  max-width:calc(100% - 24px);
+  white-space:nowrap;
   opacity:.88;
   pointer-events:none;
   transition:opacity .25s,transform .25s,border-color .25s;
 }
 .demo-media:hover::after{opacity:1;border-color:rgba(59,160,192,.35);transform:translateY(-1px)}
 .demo-media:focus-visible{outline:2px solid rgba(59,160,192,.55);outline-offset:3px}
-.demo-card .demo-media{min-height:clamp(260px,28vw,420px)}
-.demo-card--feature .demo-media{aspect-ratio:16/9;min-height:clamp(340px,42vw,620px)}
+.demo-card .demo-media{min-height:0}
+.demo-card--feature .demo-media{aspect-ratio:16/9;min-height:0}
 .demo-media img,.demo-media video{width:100%;height:100%;object-fit:contain;display:block}
 .demo-label{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
 .demo-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
@@ -294,8 +296,8 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .ig-card{padding:44px 32px}
   .price-card{padding:56px 44px}
   .demo-grid{gap:16px}
-  .demo-card .demo-media{min-height:clamp(220px,34vw,360px)}
-  .demo-card--feature .demo-media{min-height:clamp(280px,42vw,460px)}
+  .demo-card .demo-media{min-height:0}
+  .demo-card--feature .demo-media{min-height:0}
 }
 
 /* Tablet portrait */
@@ -359,8 +361,21 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .fc{padding:40px 28px}
   .fc::before{top:16px;right:20px}
   .demo-card{grid-column:1/-1}
-  .demo-card .demo-media{min-height:clamp(200px,56vw,300px)}
-  .demo-card--feature .demo-media{min-height:clamp(220px,62vw,340px)}
+  .demo-intro{margin-bottom:40px}
+  .demo-grid{gap:14px}
+  .demo-card{padding:16px;gap:12px}
+  .demo-card .demo-media{min-height:0}
+  .demo-card--feature .demo-media{min-height:0}
+  .demo-title{font-size:17px}
+  .demo-copy{font-size:13px;line-height:1.6}
+  .demo-media::after{
+    content:'Tap to expand';
+    right:8px;
+    bottom:8px;
+    font-size:8px;
+    padding:5px 8px;
+    letter-spacing:.06em;
+  }
   .ucc{padding:40px 32px}
   .ucc h3{font-size:22px}
   .ig-card{padding:40px 28px}
@@ -413,7 +428,10 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc-icon{width:24px;height:24px;margin-bottom:20px}
   .fc{padding:36px 24px}
   .fc-icon{margin-bottom:24px}
-  .demo-card{padding:18px}
+  .demo-card{padding:14px}
+  .demo-card .demo-media{min-height:0}
+  .demo-card--feature .demo-media{min-height:0}
+  .demo-copy{font-size:12px;line-height:1.55}
   .ucc{padding:36px 28px}
   .ucc h3{font-size:20px}
   .ucc .ucc-stat{font-size:9px}
