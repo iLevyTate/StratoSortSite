@@ -726,74 +726,21 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <div class="demo-intro" data-r>
       <p class="label">Product preview</p>
       <h2 class="title">See StratoSort in action <em>before you install.</em></h2>
-      <p class="desc" style="margin:0 auto">A curated set of the most important clips: full workflow, setup, ingestion, review, semantic search, and document chat.</p>
+      <p class="desc" style="margin:0 auto">One complete StratoSort product ad. It autoplays muted and loops. For the best experience, turn on volume.</p>
     </div>
     <div class="demo-grid" data-r data-d="120">
       <article class="demo-card demo-card--feature">
         <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort end to end workflow demonstration">
-            <source src="STRATOSORTVIDEOS/Part_09_End_to_End_Workflow_Demonstration.mp4" type="video/mp4">
+          <video autoplay loop muted playsinline webkit-playsinline preload="metadata" aria-label="StratoSort product ad video">
+            <source src="STRATOSORTVIDEOS/StratoAd.mov">
+            <source src="STRATOSORTVIDEOS/StratoAd.mov" type="video/quicktime">
+            <source src="STRATOSORTVIDEOS/StratoAd.mov" type="video/mp4">
             Your browser does not support embedded video playback.
           </video>
         </div>
-        <p class="demo-label">Part 09</p>
-        <h3 class="demo-title">End-to-end workflow demonstration</h3>
-        <p class="demo-copy">See the full journey from ingestion to AI-assisted organization and retrieval in one continuous flow.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort file discovery and AI analysis">
-            <source src="STRATOSORTVIDEOS/Part_03_File_Discovery_and_AI_Analysis.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 03</p>
-        <h3 class="demo-title">File discovery and AI analysis</h3>
-        <p class="demo-copy">Watch ingestion, document understanding, and early classification decisions happen automatically.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort review queue and automated organization">
-            <source src="STRATOSORTVIDEOS/Part_04_Review_Queue_and_Automated_Organization.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 04</p>
-        <h3 class="demo-title">Review queue and automation</h3>
-        <p class="demo-copy">Approve, adjust, and apply bulk organization actions with a human-in-the-loop workflow.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort semantic search and graph visualization">
-            <source src="STRATOSORTVIDEOS/Part_06_Semantic_Search_and_Graph_Visualization.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 06</p>
-        <h3 class="demo-title">Semantic search and graph visualization</h3>
-        <p class="demo-copy">Explore related documents by meaning, then navigate clusters and relationships in the knowledge graph.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort conversational chat context">
-            <source src="STRATOSORTVIDEOS/Part_07_Conversational_Chat_Context.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 07</p>
-        <h3 class="demo-title">Conversational chat with context</h3>
-        <p class="demo-copy">Ask questions in plain language and get grounded answers from your own indexed documents.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort wizard choosing local AI models">
-            <source src="STRATOSORTVIDEOS/Wizard_01_Choosing_Local_AI_Models.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Wizard 01</p>
-        <h3 class="demo-title">Choose local AI models</h3>
-        <p class="demo-copy">Select model profiles based on quality needs and available compute.</p>
+        <p class="demo-label">Product ad</p>
+        <h3 class="demo-title">StratoSort overview</h3>
+        <p class="demo-copy">Autoplays without sound and repeats continuously. Turn on volume for the full experience.</p>
       </article>
     </div>
   </div>
@@ -1071,6 +1018,20 @@ const videoModalPlayer=document.getElementById('videoModalPlayer');
 const videoModalClose=document.getElementById('videoModalClose');
 const demoVideos=document.querySelectorAll('.demo-media video');
 
+function ensureMutedAutoplay(videoEl){
+  if(!videoEl)return;
+  videoEl.muted=true;
+  videoEl.defaultMuted=true;
+  videoEl.playsInline=true;
+  videoEl.setAttribute('muted','');
+  videoEl.setAttribute('playsinline','');
+  videoEl.setAttribute('webkit-playsinline','');
+  const playAttempt=videoEl.play();
+  if(playAttempt&&typeof playAttempt.catch==='function'){
+    playAttempt.catch(()=>{});
+  }
+}
+
 function openVideoModal(videoEl){
   if(!videoEl)return;
   const src=videoEl.currentSrc||videoEl.querySelector('source')?.src;
@@ -1097,6 +1058,8 @@ function closeVideoModal(){
 }
 
 demoVideos.forEach(videoEl=>{
+  ensureMutedAutoplay(videoEl);
+  videoEl.addEventListener('loadedmetadata',()=>ensureMutedAutoplay(videoEl),{once:true});
   const media=videoEl.closest('.demo-media');
   if(!media)return;
   media.setAttribute('role','button');
