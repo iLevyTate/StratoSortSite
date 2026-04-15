@@ -137,52 +137,6 @@ section{padding:180px 0;position:relative}
 .fc h3{font-size:16px;font-weight:500;margin-bottom:14px;letter-spacing:-.01em}
 .fc p{font-size:14px;color:var(--t2);line-height:1.85}
 
-/* DEMO */
-.demo{background:var(--bg2)}
-.demo .w{max-width:1360px}
-.demo-intro{text-align:center;max-width:760px;margin:0 auto 72px}
-.demo-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
-.demo-card{grid-column:span 6;background:rgba(17,30,42,.4);border:1px solid var(--b1);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:18px;transition:background .35s,border-color .35s}
-.demo-card--feature{grid-column:1/-1}
-.demo-card:hover{background:rgba(17,30,42,.62);border-color:rgba(59,160,192,.18)}
-.demo-media{position:relative;border:1px solid var(--b1);border-radius:8px;overflow:hidden;background:#05090d;aspect-ratio:16/9;cursor:zoom-in}
-.demo-media::after{
-  content:'Click to expand';
-  position:absolute;
-  right:12px;
-  bottom:12px;
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--t1);
-  background:rgba(7,12,18,.78);
-  border:1px solid var(--b2);
-  border-radius:999px;
-  padding:6px 10px;
-  max-width:calc(100% - 24px);
-  white-space:nowrap;
-  opacity:.88;
-  pointer-events:none;
-  transition:opacity .25s,transform .25s,border-color .25s;
-}
-.demo-media:hover::after{opacity:1;border-color:rgba(59,160,192,.35);transform:translateY(-1px)}
-.demo-media:focus-visible{outline:2px solid rgba(59,160,192,.55);outline-offset:3px}
-.demo-card .demo-media{min-height:0}
-.demo-card--feature .demo-media{aspect-ratio:16/9;min-height:0}
-.demo-media img,.demo-media video{width:100%;height:100%;object-fit:contain;display:block}
-.demo-label{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
-.demo-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
-.demo-copy{font-size:14px;color:var(--t2);line-height:1.75}
-
-/* VIDEO LIGHTBOX */
-.video-modal{position:fixed;inset:0;z-index:1200;background:rgba(3,8,12,.88);display:flex;align-items:center;justify-content:center;padding:28px}
-.video-modal[hidden]{display:none}
-.video-modal-dialog{position:relative;width:min(1200px,96vw);max-height:90vh}
-.video-modal-close{position:absolute;top:-16px;right:-10px;width:38px;height:38px;border:1px solid var(--b2);border-radius:999px;background:rgba(7,12,18,.92);color:var(--t1);font-size:22px;line-height:1;cursor:pointer;z-index:2}
-.video-modal-close:hover{border-color:var(--cyan);color:var(--cyan)}
-.video-modal-player{width:100%;max-height:90vh;border:1px solid var(--b2);border-radius:12px;background:#02060a;display:block}
-
 /* DATA INTERLUDE */
 .interlude{background:var(--bg2);padding:140px 0;text-align:center;position:relative;overflow:hidden}
 .interlude-orb{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(59,160,192,.035) 0%,transparent 55%);pointer-events:none}
@@ -301,9 +255,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .ig-card{padding:44px 32px}
   .price-card{padding:56px 44px}
   .price-cards{grid-template-columns:1fr}
-  .demo-grid{gap:16px}
-  .demo-card .demo-media{min-height:0}
-  .demo-card--feature .demo-media{min-height:0}
 }
 
 /* Tablet portrait */
@@ -350,7 +301,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .prob-top{grid-template-columns:1fr;gap:48px}
   .prob-grid{grid-template-columns:1fr}
   .fg{grid-template-columns:1fr}
-  .demo-grid{grid-template-columns:1fr}
   .interlude-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr;gap:56px}
   .steps::before{display:none}
@@ -366,22 +316,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc{padding:36px 28px}
   .fc{padding:40px 28px}
   .fc::before{top:16px;right:20px}
-  .demo-card{grid-column:1/-1}
-  .demo-intro{margin-bottom:40px}
-  .demo-grid{gap:14px}
-  .demo-card{padding:16px;gap:12px}
-  .demo-card .demo-media{min-height:0}
-  .demo-card--feature .demo-media{min-height:0}
-  .demo-title{font-size:17px}
-  .demo-copy{font-size:13px;line-height:1.6}
-  .demo-media::after{
-    content:'Tap to expand';
-    right:8px;
-    bottom:8px;
-    font-size:8px;
-    padding:5px 8px;
-    letter-spacing:.06em;
-  }
   .ucc{padding:40px 32px}
   .ucc h3{font-size:22px}
   .ig-card{padding:40px 28px}
@@ -434,10 +368,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc-icon{width:24px;height:24px;margin-bottom:20px}
   .fc{padding:36px 24px}
   .fc-icon{margin-bottom:24px}
-  .demo-card{padding:14px}
-  .demo-card .demo-media{min-height:0}
-  .demo-card--feature .demo-media{min-height:0}
-  .demo-copy{font-size:12px;line-height:1.55}
   .ucc{padding:36px 28px}
   .ucc h3{font-size:20px}
   .ucc .ucc-stat{font-size:9px}
@@ -513,7 +443,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <a href="/" class="nav-mark">StratoSort</a>
     <ul class="nav-r" id="navR">
       <li><a href="#features">Features</a></li>
-      <li><a href="#demo">Demo</a></li>
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#usecases">Use Cases</a></li>
       <li><a href="#pricing">Pricing</a></li>
@@ -719,33 +648,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- DEMO -->
-<div class="div"></div>
-<section class="demo" id="demo">
-  <div class="w">
-    <div class="demo-intro" data-r>
-      <p class="label">Product preview</p>
-      <h2 class="title">See StratoSort in action <em>before you install.</em></h2>
-      <p class="desc" style="margin:0 auto">One complete StratoSort product ad. It autoplays muted and loops. For the best experience, turn on volume.</p>
-    </div>
-    <div class="demo-grid" data-r data-d="120">
-      <article class="demo-card demo-card--feature">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline webkit-playsinline preload="metadata" aria-label="StratoSort product ad video">
-            <source src="STRATOSORTVIDEOS/StratoAd.mov">
-            <source src="STRATOSORTVIDEOS/StratoAd.mov" type="video/quicktime">
-            <source src="STRATOSORTVIDEOS/StratoAd.mov" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Product ad</p>
-        <h3 class="demo-title">StratoSort overview</h3>
-        <p class="demo-copy">Autoplays without sound and repeats continuously. Turn on volume for the full experience.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ARCHITECTURE -->
 <div class="div"></div>
 <section class="arch" id="architecture">
@@ -907,13 +809,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </footer>
 
-<div class="video-modal" id="videoModal" hidden aria-hidden="true">
-  <div class="video-modal-dialog">
-    <button class="video-modal-close" id="videoModalClose" aria-label="Close expanded video">&times;</button>
-    <video class="video-modal-player" id="videoModalPlayer" controls autoplay loop playsinline preload="metadata"></video>
-  </div>
-</div>
-
 <script>
 // ===== CONSTELLATION MESH — viewport buffer + document-space particles (avoids huge clearRect) =====
 (function(){
@@ -1012,71 +907,6 @@ document.addEventListener('click',e=>{if(!navR.contains(e.target)&&!mobBtn.conta
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;e.preventDefault();const t=document.querySelector(h);if(t)scrollTo({top:t.getBoundingClientRect().top+pageYOffset-80,behavior:'smooth'})})});
 
-// ===== VIDEO LIGHTBOX =====
-const videoModal=document.getElementById('videoModal');
-const videoModalPlayer=document.getElementById('videoModalPlayer');
-const videoModalClose=document.getElementById('videoModalClose');
-const demoVideos=document.querySelectorAll('.demo-media video');
-
-function ensureMutedAutoplay(videoEl){
-  if(!videoEl)return;
-  videoEl.muted=true;
-  videoEl.defaultMuted=true;
-  videoEl.playsInline=true;
-  videoEl.setAttribute('muted','');
-  videoEl.setAttribute('playsinline','');
-  videoEl.setAttribute('webkit-playsinline','');
-  const playAttempt=videoEl.play();
-  if(playAttempt&&typeof playAttempt.catch==='function'){
-    playAttempt.catch(()=>{});
-  }
-}
-
-function openVideoModal(videoEl){
-  if(!videoEl)return;
-  const src=videoEl.currentSrc||videoEl.querySelector('source')?.src;
-  if(!src)return;
-  demoVideos.forEach(v=>v.pause());
-  videoModalPlayer.src=src;
-  videoModalPlayer.currentTime=videoEl.currentTime||0;
-  videoModalPlayer.muted=videoEl.muted;
-  videoModal.hidden=false;
-  videoModal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-  void videoModalPlayer.play().catch(()=>{});
-}
-
-function closeVideoModal(){
-  if(videoModal.hidden)return;
-  videoModalPlayer.pause();
-  videoModalPlayer.removeAttribute('src');
-  videoModalPlayer.load();
-  videoModal.hidden=true;
-  videoModal.setAttribute('aria-hidden','true');
-  document.body.style.overflow='';
-  demoVideos.forEach(v=>{if(v.paused){void v.play().catch(()=>{});}});
-}
-
-demoVideos.forEach(videoEl=>{
-  ensureMutedAutoplay(videoEl);
-  videoEl.addEventListener('loadedmetadata',()=>ensureMutedAutoplay(videoEl),{once:true});
-  const media=videoEl.closest('.demo-media');
-  if(!media)return;
-  media.setAttribute('role','button');
-  media.setAttribute('tabindex','0');
-  media.setAttribute('aria-label','Expand video');
-  media.addEventListener('click',()=>openVideoModal(videoEl));
-  media.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){
-      e.preventDefault();
-      openVideoModal(videoEl);
-    }
-  });
-});
-
-videoModalClose.addEventListener('click',closeVideoModal);
-videoModal.addEventListener('click',e=>{if(e.target===videoModal)closeVideoModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideoModal();});
 </script>
 </body>
 </html>
