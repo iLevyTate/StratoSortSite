@@ -1,1 +1,1 @@
-A page for StratoSort. 
+A page for StratoSort.

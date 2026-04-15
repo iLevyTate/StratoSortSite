@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StratoSort — Your files. Your AI. Your machine.</title>
+<meta name="description" content="A local AI knowledge engine for professionals who work with sensitive documents. Semantic search, document chat, and knowledge graphs — all running on your machine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070C12;--bg2:#0B1318;--sf:#111E2A;--sf2:#172A38;
+  --cyan:#3BA0C0;--gold:#E0A020;--gold-hi:#F0B838;
+  --mid:#1078A0;--dark:#003D5C;
+  --t1:#DCE2E8;--t2:#7A8B9A;--t3:#3E4E5C;
+  --b1:rgba(255,255,255,0.04);--b2:rgba(255,255,255,0.08);
+  --sans:'DM Sans',sans-serif;--serif:'Instrument Serif',serif;--mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--sf2) var(--bg);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--sf2);border-radius:2px}
+body{font-family:var(--sans);font-weight:400;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+::selection{background:rgba(59,160,192,0.18);color:#fff}
+body::after{content:'';position:fixed;inset:0;z-index:10000;pointer-events:none;opacity:.08;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E")}
+.w{max-width:1180px;margin:0 auto;padding:0 48px;position:relative;z-index:1}
+[data-r]{opacity:0;transform:translateY(48px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+[data-r].on{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  [data-r]{opacity:1;transform:none;transition:none}
+  .hero h1 .ln span,.hero-chip,.hero-sub,.hero-accent,.hero-platforms,.scroll-cue{animation:none!important;opacity:1!important;transform:none!important}
+  .hero h1 .ln{overflow:visible}
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(7,12,18,.9);border-bottom:1px solid var(--b1)}
+nav .w{display:flex;align-items:center;justify-content:space-between;height:100%}
+.nav-mark{text-decoration:none;color:var(--t1);font-weight:500;font-size:14px;letter-spacing:.1em;text-transform:uppercase;position:relative;padding-left:0}
+.nav-mark::after{content:'Core';font-size:8px;font-family:var(--mono);color:var(--t3);letter-spacing:.14em;position:absolute;bottom:-1px;right:-38px;opacity:.5}
+.nav-r{display:flex;align-items:center;gap:44px;list-style:none}
+.nav-r a{color:var(--t3);text-decoration:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:color .25s;position:relative}
+.nav-r a::after{content:'';position:absolute;bottom:-6px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .4s var(--ease);transform-origin:left}
+.nav-r a:hover{color:var(--t1)}.nav-r a:hover::after{transform:scaleX(1)}
+.mob-btn{display:none;background:none;border:none;color:var(--t1);cursor:pointer;padding:8px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:72px 0 0}
+canvas#mesh{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
+.orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;max-width:100vw}
+.orb-a{width:820px;height:820px;background:radial-gradient(circle,rgba(16,120,160,0.08) 0%,transparent 60%);top:-25%;left:-15%;animation:drift 40s ease-in-out infinite alternate;will-change:transform}
+.orb-b{width:620px;height:620px;background:radial-gradient(circle,rgba(224,160,32,0.035) 0%,transparent 60%);bottom:-18%;right:-10%;animation:drift 46s ease-in-out infinite alternate-reverse;will-change:transform}
+.orb-c{width:340px;height:340px;background:radial-gradient(circle,rgba(59,160,192,0.035) 0%,transparent 60%);top:45%;left:55%;animation:drift 36s ease-in-out infinite alternate;will-change:transform}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-30px) scale(1.08)}100%{transform:translate(-30px,25px) scale(.94)}}
+.hero-inner{position:relative;z-index:2;text-align:center;max-width:960px;padding:0 32px}
+.hero-chip{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;margin-bottom:60px;opacity:0;animation:fi .7s .15s ease forwards;border:1px solid rgba(59,160,192,.1);padding:8px 20px;border-radius:100px;background:rgba(59,160,192,.02)}
+.hero-chip-dot{width:5px;height:5px;background:var(--cyan);border-radius:50%;box-shadow:0 0 10px rgba(59,160,192,.45);animation:pd 3.2s ease infinite;will-change:opacity,transform}
+@keyframes pd{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:.5;transform:scale(1.15)}}
+@keyframes fi{to{opacity:1}}
+.hero h1{font-size:clamp(48px,9vw,112px);font-weight:500;line-height:.92;letter-spacing:-.05em;margin-bottom:52px}
+.hero h1 .ln{display:block;overflow:hidden;padding:4px 0}
+.hero h1 .ln span{display:inline-block;opacity:0;transform:translateY(120%);animation:lu 1.1s var(--ease) forwards}
+.hero h1 .ln:nth-child(1) span{animation-delay:.25s}
+.hero h1 .ln:nth-child(2) span{animation-delay:.42s}
+.hero h1 .ln:nth-child(3) span{animation-delay:.58s;color:var(--gold);font-family:var(--serif);font-style:italic;letter-spacing:-.03em}
+@keyframes lu{to{opacity:1;transform:translateY(0)}}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);color:var(--t2);line-height:1.75;max-width:560px;margin:0 auto 0;opacity:0;animation:fi 1s .9s ease forwards}
+
+/* Hero horizontal accent */
+.hero-accent{width:80px;height:1px;margin:40px auto 32px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;animation:fi .6s 1.15s ease forwards}
+
+.hero-platforms{font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:.06em;opacity:0;animation:fi .6s 1.3s ease forwards}
+.hero-platforms span{margin:0 12px;opacity:.25}
+
+.scroll-cue{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);opacity:0;animation:fi .5s 2s ease forwards}
+.scroll-bar{width:1px;height:48px;margin:0 auto 10px;background:linear-gradient(180deg,var(--cyan),transparent);animation:sb 2.4s ease infinite}
+@keyframes sb{0%,100%{opacity:.2;transform:scaleY(1)}50%{opacity:.6;transform:scaleY(.5);transform-origin:top}}
+.scroll-cue span{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:.2em;text-transform:uppercase}
+
+/* EVIDENCE BAR */
+.ev-bar{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:72px 0;background:var(--bg2);position:relative;z-index:1;overflow:hidden}
+.ev-bar::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:linear-gradient(90deg,transparent,rgba(224,160,32,.08),transparent)}
+.ev-row{display:flex;justify-content:center;align-items:center;gap:88px;flex-wrap:wrap}
+.ev{text-align:center}
+.ev-num{font-size:60px;font-weight:500;letter-spacing:-.045em;color:var(--t1);line-height:1;margin-bottom:8px}
+.ev-num .a{color:var(--gold)}
+.ev-label{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.ev-src{font-family:var(--mono);font-size:8px;color:var(--t3);opacity:.4;letter-spacing:.04em}
+
+/* SECTIONS */
+section{padding:180px 0;position:relative}
+.div{height:1px;position:relative;z-index:1;background:var(--b1);overflow:visible}
+.div::after{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:linear-gradient(90deg,transparent,rgba(59,160,192,.1),transparent)}
+.label{font-family:var(--mono);font-size:10px;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase;margin-bottom:32px;opacity:.8}
+.title{font-size:clamp(30px,4.5vw,56px);font-weight:500;line-height:1.04;letter-spacing:-.04em;margin-bottom:28px}
+.title em{font-family:var(--serif);font-style:italic;color:var(--gold);letter-spacing:-.02em}
+.desc{font-size:16px;color:var(--t2);max-width:480px;line-height:1.8}
+
+/* PROBLEM */
+.prob{background:var(--bg2)}
+.prob-top{display:grid;grid-template-columns:1.1fr .9fr;gap:120px;align-items:start}
+.prob-quote{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,32px);color:var(--t1);line-height:1.35;position:relative;padding-left:40px;margin-top:8px}
+.prob-quote::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),var(--gold) 60%,transparent);border-radius:1px}
+
+/* Inline stat callout */
+.stat-callout{margin-top:52px;padding:36px;border:1px solid rgba(224,160,32,.08);border-radius:10px;background:rgba(224,160,32,.01);position:relative}
+.stat-callout::before{content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;background:linear-gradient(90deg,transparent,rgba(224,160,32,.15),transparent)}
+.stat-callout-num{font-size:44px;font-weight:500;letter-spacing:-.035em;color:var(--gold);line-height:1;margin-bottom:10px}
+.stat-callout-text{font-size:14px;color:var(--t2);line-height:1.75}
+.stat-callout-src{font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:14px;opacity:.5;letter-spacing:.04em}
+
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:100px;background:var(--b1);border-radius:10px;overflow:hidden}
+.pc{background:var(--bg2);padding:52px 44px;position:relative;transition:background .4s}
+.pc:hover{background:rgba(17,30,42,.5)}
+.pc::before{content:'';position:absolute;top:-1px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .5s}
+.pc:hover::before{opacity:.3}
+.pc-icon{width:28px;height:28px;margin-bottom:28px;color:var(--gold);opacity:.45;transition:opacity .4s,transform .4s}
+.pc:hover .pc-icon{opacity:.8;transform:translateY(-2px)}
+.pc h3{font-size:16px;font-weight:500;margin-bottom:12px;letter-spacing:-.01em}
+.pc p{font-size:14px;color:var(--t2);line-height:1.85}
+.pc .pc-stat{font-family:var(--mono);font-size:10px;color:var(--cyan);margin-top:20px;opacity:.5;transition:opacity .3s;letter-spacing:.02em}
+.pc:hover .pc-stat{opacity:.75}
+
+/* FEATURES */
+.feat{background:var(--bg)}
+.feat-intro{text-align:center;max-width:620px;margin:0 auto 100px}
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border-radius:10px;overflow:hidden}
+.fc{background:var(--bg);padding:60px 44px;position:relative;transition:background .4s;counter-increment:feat}
+.fc:hover{background:rgba(17,30,42,.6)}
+.fc::before{content:'0' counter(feat);font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:.08em;position:absolute;top:28px;right:32px;opacity:0;transition:opacity .4s,color .4s}
+.fc:hover::before{opacity:1;color:var(--cyan)}
+.fc::after{content:'';position:absolute;bottom:-1px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .5s}
+.fc:hover::after{opacity:.25}
+.fc-icon{width:20px;height:20px;color:var(--cyan);margin-bottom:36px;stroke-width:1.5;transition:filter .4s,transform .4s}
+.fc:hover .fc-icon{filter:drop-shadow(0 0 10px rgba(59,160,192,.3));transform:translateY(-2px)}
+.fc h3{font-size:16px;font-weight:500;margin-bottom:14px;letter-spacing:-.01em}
+.fc p{font-size:14px;color:var(--t2);line-height:1.85}
+
+/* DATA INTERLUDE */
+.interlude{background:var(--bg2);padding:140px 0;text-align:center;position:relative;overflow:hidden}
+.interlude-orb{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(59,160,192,.035) 0%,transparent 55%);pointer-events:none}
+.interlude-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border-radius:10px;overflow:hidden;margin-top:88px}
+.ig-card{background:var(--bg2);padding:56px 40px;text-align:center;transition:background .4s}
+.ig-card:hover{background:rgba(17,30,42,.5)}
+.ig-num{font-size:52px;font-weight:500;letter-spacing:-.04em;color:var(--t1);line-height:1;margin-bottom:16px}
+.ig-num .a{color:var(--gold)}
+.ig-num .c{color:var(--cyan)}
+.ig-text{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px}
+.ig-src{font-family:var(--mono);font-size:8px;color:var(--t3);opacity:.4;letter-spacing:.06em}
+
+/* HOW */
+.how{background:var(--bg)}
+.how-intro{text-align:center;max-width:540px;margin:0 auto 100px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
+.steps::before{content:'';position:absolute;top:52px;left:calc(100%/6);width:calc(100%*4/6);height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.15}
+.stp{text-align:center;padding:0 24px;position:relative}
+.stp-n{width:112px;height:112px;border:1px solid var(--b2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 40px;font-family:var(--mono);font-size:14px;color:var(--t3);background:var(--bg);position:relative;z-index:2;transition:all .5s var(--ease)}
+.stp:hover .stp-n{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 60px rgba(59,160,192,.05),0 0 0 1px rgba(59,160,192,.06)}
+.stp h3{font-size:18px;font-weight:500;margin-bottom:12px;letter-spacing:-.01em}
+.stp p{font-size:14px;color:var(--t2);line-height:1.8}
+
+/* ARCH */
+.arch{background:var(--bg2);overflow:hidden}
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.arch-pts{display:flex;flex-direction:column;gap:44px}
+.ap{display:flex;gap:24px}
+.ap-bar{flex-shrink:0;width:2px;border-radius:1px;opacity:.3;background:linear-gradient(180deg,var(--cyan),transparent);transition:opacity .3s}
+.ap:hover .ap-bar{opacity:.7}
+.ap h4{font-size:16px;font-weight:500;margin-bottom:8px}
+.ap p{font-size:14px;color:var(--t2);line-height:1.8}
+.arch-box{border:1px solid var(--b2);border-radius:12px;overflow:hidden;position:relative;background:var(--bg2)}
+.arch-box::before{content:'';position:absolute;top:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(59,160,192,.18),transparent)}
+.arch-hdr{padding:18px 28px;border-bottom:1px solid var(--b1);font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.14em;text-transform:uppercase;background:rgba(8,14,20,.5);display:flex;align-items:center;gap:12px}
+.arch-hdr-dots{display:flex;gap:5px}
+.arch-hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--t3);opacity:.25}
+.arch-body{padding:16px}
+.al{border:1px solid var(--b1);border-radius:6px;padding:15px 22px;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:12px;transition:all .35s var(--ease);cursor:default}
+.al:hover{border-color:rgba(59,160,192,.18);background:rgba(59,160,192,.015);transform:translateX(8px);box-shadow:-4px 0 0 rgba(59,160,192,.6)}
+.al-n{color:var(--t1);letter-spacing:.02em}.al-t{color:var(--t3);font-size:10px;letter-spacing:.06em}
+.al-arr{text-align:center;padding:2px 0;color:var(--t3);font-size:9px;opacity:.2}
+.arch-ftr{padding:18px 28px;border-top:1px solid var(--b1);text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:rgba(224,160,32,.015);color:var(--gold);opacity:.7}
+
+/* USE CASES */
+.uc{background:var(--bg)}
+.uc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:100px;background:var(--b1);border-radius:8px;overflow:hidden}
+.ucc{background:var(--bg);padding:56px 52px;transition:background .4s;position:relative}
+.ucc:hover{background:rgba(17,30,42,.5)}
+.ucc::before{content:'';position:absolute;top:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .5s}
+.ucc:hover::before{opacity:.2}
+.ucc-role{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.16em;text-transform:uppercase;margin-bottom:28px;opacity:.6;transition:opacity .3s}
+.ucc:hover .ucc-role{opacity:1}
+.ucc h3{font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.2vw,28px);font-weight:400;margin-bottom:18px;line-height:1.2;letter-spacing:-.01em;color:var(--t1)}
+.ucc p{font-size:14px;color:var(--t2);line-height:1.85}
+.ucc .ucc-stat{font-family:var(--mono);font-size:10px;color:var(--gold);margin-top:24px;opacity:.5;transition:opacity .3s;letter-spacing:.02em}
+.ucc:hover .ucc-stat{opacity:.75}
+
+/* PRICING */
+.price{background:var(--bg2)}
+.price-split{display:flex;flex-direction:column;gap:52px}
+.price-lead{max-width:680px;margin:0 auto;text-align:center}
+.price-lead .desc{max-width:560px;margin:0 auto}
+.price-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.price-card{border:1px solid rgba(224,160,32,.12);border-radius:14px;padding:64px 56px;position:relative;transition:border-color .5s,box-shadow .5s;background:linear-gradient(180deg,rgba(224,160,32,.015) 0%,transparent 40%)}
+.price-card:hover{border-color:rgba(224,160,32,.25);box-shadow:0 24px 80px rgba(0,0,0,.3),0 0 0 1px rgba(224,160,32,.06)}
+.price-card::before{content:'';position:absolute;top:-1px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25}
+.price-cards .price-card{height:100%}
+.price-card--beta{border-color:rgba(59,160,192,.2);background:linear-gradient(180deg,rgba(59,160,192,.03) 0%,transparent 45%)}
+.price-card--beta::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.35}
+.price-name{font-size:12px;color:var(--t2);margin-bottom:20px;letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
+.price-amt{font-size:72px;font-weight:500;letter-spacing:-.05em;margin-bottom:4px;line-height:1}
+.price-per{font-family:var(--mono);font-size:12px;color:var(--t3);margin-bottom:52px;letter-spacing:.04em}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
+.price-list li{font-size:14px;color:var(--t2);display:flex;align-items:baseline;gap:16px;line-height:1.6}
+.price-list li::before{content:'';flex-shrink:0;width:3px;height:3px;background:var(--cyan);border-radius:50%;margin-top:3px}
+.price-btn{display:flex;align-items:center;justify-content:center;width:100%;height:56px;background:var(--gold);color:var(--bg);border:none;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;letter-spacing:.03em;transition:all .25s var(--ease);position:relative;overflow:hidden}
+.price-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 50%);opacity:0;transition:opacity .25s}
+.price-btn:hover{background:var(--gold-hi);transform:translateY(-3px);box-shadow:0 12px 40px rgba(224,160,32,.2),0 0 0 1px rgba(224,160,32,.3)}
+.price-btn:hover::before{opacity:1}
+.price-context{margin-top:24px;padding-top:24px;border-top:1px solid rgba(224,160,32,.06)}
+.price-context p{font-size:11px;color:var(--t3);line-height:1.7;font-family:var(--mono);letter-spacing:.02em;opacity:.6}
+
+/* FILE TYPES */
+.ft{background:var(--bg)}
+.ft-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:56px;margin-top:88px}
+.ft-group h4{font-size:11px;font-weight:500;margin-bottom:24px;color:var(--t2);letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
+.ft-list{display:flex;flex-wrap:wrap;gap:6px}
+.ft-tag{font-family:var(--mono);font-size:11px;color:var(--cyan);opacity:.55;background:rgba(59,160,192,.02);padding:6px 12px;border-radius:4px;border:1px solid rgba(59,160,192,.05);transition:all .25s var(--ease);cursor:default}
+.ft-tag:hover{opacity:1;background:rgba(59,160,192,.06);border-color:rgba(59,160,192,.14);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+/* CTA */
+.cta{padding:220px 0;text-align:center;position:relative;overflow:hidden}
+.cta-orb{position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(224,160,32,.035) 0%,transparent 50%);pointer-events:none}
+.cta .title{max-width:640px;margin:0 auto 28px}.cta .desc{max-width:440px;margin:0 auto}
+
+/* FOOTER */
+footer{border-top:1px solid var(--b1);padding:44px 0;position:relative}
+footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;background:linear-gradient(90deg,transparent,rgba(224,160,32,.06),transparent)}
+.footer-inner{display:flex;align-items:center;justify-content:center}
+.footer-co{font-size:11px;color:var(--t3);letter-spacing:.03em;opacity:.6}
+
+/* RESPONSIVE */
+
+/* Tablet landscape */
+@media(max-width:1024px){
+  .w{padding:0 36px}
+  body::after{opacity:.05}
+  .orb,.interlude-orb,.cta-orb{display:none}
+  .prob-top{gap:72px}
+  .arch-grid{gap:64px}
+  .ev-row{gap:56px}
+  .fc{padding:48px 32px}
+  .ucc{padding:44px 40px}
+  .pc{padding:44px 36px}
+  .ig-card{padding:44px 32px}
+  .price-card{padding:56px 44px}
+  .price-cards{grid-template-columns:1fr}
+}
+
+/* Tablet portrait */
+@media(max-width:768px){
+  .w{padding:0 24px}
+  section{padding:120px 0}
+
+  /* Nav */
+  .mob-btn{display:block}
+  .nav-r{display:none}
+  .nav-r.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:72px;left:0;right:0;
+    background:rgba(7,12,18,.95);
+    border-bottom:1px solid var(--b1);
+    padding:32px 24px;gap:20px
+  }
+  .nav-r.open a{font-size:14px;letter-spacing:.04em}
+
+  /* Hero */
+  .hero{min-height:calc(100vh - 0px);padding-top:72px}
+  .hero h1{font-size:48px;letter-spacing:-.04em;margin-bottom:36px}
+  .hero h1 .ln{padding:2px 0}
+  .hero-inner{padding:0 8px}
+  .hero-sub{font-size:15px;max-width:440px}
+  .hero-chip{margin-bottom:40px;font-size:9px}
+  .hero-accent{margin:28px auto 24px;width:60px}
+  .hero-platforms{font-size:10px}
+  .scroll-cue{bottom:28px}
+  .orb-a{width:400px;height:400px;top:-15%;left:-20%}
+  .orb-b{width:300px;height:300px}
+  .orb-c{width:200px;height:200px}
+  .interlude-orb{width:300px;height:200px}
+  .cta-orb{width:300px;height:200px}
+
+  /* Evidence bar */
+  .ev-bar{padding:48px 0}
+  .ev-row{gap:32px 56px;justify-content:center;align-items:center}
+  .ev-num{font-size:40px}
+  .ev-label{font-size:8px}
+  .ev{text-align:center;width:auto}
+
+  /* Grids → single column */
+  .prob-top{grid-template-columns:1fr;gap:48px}
+  .prob-grid{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr}
+  .interlude-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:56px}
+  .steps::before{display:none}
+  .arch-grid{grid-template-columns:1fr;gap:56px}
+  .uc-grid{grid-template-columns:1fr}
+  .price-split{gap:40px}
+  .ft-groups{grid-template-columns:repeat(2,1fr);gap:36px}
+
+  /* Title */
+  .title{font-size:28px;letter-spacing:-.03em;margin-bottom:20px}
+
+  /* Cards */
+  .pc{padding:36px 28px}
+  .fc{padding:40px 28px}
+  .fc::before{top:16px;right:20px}
+  .ucc{padding:40px 32px}
+  .ucc h3{font-size:22px}
+  .ig-card{padding:40px 28px}
+  .ig-num{font-size:40px}
+
+  /* Stat callout */
+  .stat-callout{margin-top:32px;padding:24px}
+  .stat-callout-num{font-size:36px}
+
+  /* Pricing */
+  .price-card{padding:40px 28px;border-radius:10px}
+  .price-amt{font-size:56px}
+
+  /* Interlude */
+  .interlude{padding:100px 0}
+
+  /* Steps */
+  .stp-n{width:88px;height:88px;font-size:13px;margin-bottom:28px}
+
+  /* CTA */
+  .cta{padding:120px 0}
+
+  /* Footer */
+  .footer-inner{text-align:center}
+  .footer-co{font-size:10px}
+}
+
+/* Phone landscape / large phone */
+@media(max-width:580px){
+  body::after{display:none}
+  .w{padding:0 20px}
+  section{padding:96px 0}
+
+  .hero h1{font-size:40px;margin-bottom:28px}
+  .hero-sub{font-size:14px;max-width:360px}
+  .hero-chip{font-size:8px;padding:6px 14px;margin-bottom:32px}
+
+  .ev-row{flex-direction:column;gap:24px;align-items:center}
+  .ev-num{font-size:36px}
+  .ev{text-align:center}
+
+  .prob-quote{font-size:20px;padding-left:24px}
+  .prob-quote::before{width:1.5px}
+
+  .title{font-size:24px;letter-spacing:-.025em}
+  .label{font-size:9px;margin-bottom:20px}
+  .desc{font-size:15px}
+
+  .pc{padding:32px 24px}
+  .pc-icon{width:24px;height:24px;margin-bottom:20px}
+  .fc{padding:36px 24px}
+  .fc-icon{margin-bottom:24px}
+  .ucc{padding:36px 28px}
+  .ucc h3{font-size:20px}
+  .ucc .ucc-stat{font-size:9px}
+  .pc .pc-stat{font-size:9px}
+
+  .ig-card{padding:32px 20px}
+  .ig-num{font-size:36px;margin-bottom:12px}
+  .ig-text{font-size:13px}
+
+  .steps{gap:44px}
+  .stp-n{width:76px;height:76px;font-size:12px;margin-bottom:24px}
+  .stp h3{font-size:16px}
+
+  .ft-groups{grid-template-columns:1fr;gap:32px}
+  .ft-group h4{margin-bottom:16px}
+
+  .price-card{padding:36px 24px}
+  .price-amt{font-size:48px}
+  .price-name{font-size:10px}
+  .price-per{margin-bottom:36px}
+  .price-list{gap:12px;margin-bottom:40px}
+  .price-list li{font-size:13px}
+  .price-btn{height:52px;font-size:13px}
+
+  .interlude{padding:80px 0}
+  .cta{padding:96px 0}
+
+  .stat-callout{padding:20px}
+  .stat-callout-num{font-size:32px}
+  .stat-callout-text{font-size:13px}
+
+  .arch-pts{gap:32px}
+  .ap{gap:16px}
+  .ap h4{font-size:15px}
+  .ap p{font-size:13px}
+  .al{padding:12px 14px;font-size:10px;flex-wrap:wrap;gap:4px}
+  .al-t{font-size:8px}
+  .arch-hdr{padding:14px 16px;font-size:8px}
+  .arch-ftr{padding:14px 16px;font-size:8px}
+  .arch-body{padding:10px}
+
+  .nav-mark{font-size:13px}
+  .nav-mark::after{display:none}
+
+  .footer-co{font-size:9px}
+}
+
+/* Small phone */
+@media(max-width:380px){
+  .w{padding:0 16px}
+  .hero h1{font-size:34px}
+  .hero-sub{font-size:13px;max-width:300px}
+  .title{font-size:22px}
+  .ev-num{font-size:32px}
+  .ig-num{font-size:32px}
+  .price-amt{font-size:40px}
+  .prob-quote{font-size:18px}
+  .stat-callout-num{font-size:28px}
+  .pc{padding:28px 20px}
+  .fc{padding:32px 20px}
+  .ucc{padding:32px 24px}
+  .price-card{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+<noscript><style>[data-r]{opacity:1!important;transform:none!important}</style></noscript>
+
+<canvas id="mesh" aria-hidden="true"></canvas>
+
+<nav>
+  <div class="w">
+    <a href="/" class="nav-mark">StratoSort</a>
+    <ul class="nav-r" id="navR">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#architecture">Architecture</a></li>
+      <li><a href="#usecases">Use Cases</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <button class="mob-btn" id="mobBtn" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+  <div class="hero-inner">
+    <div class="hero-chip"><div class="hero-chip-dot"></div>Privacy-first desktop AI</div>
+    <h1>
+      <span class="ln"><span>Your files.</span></span>
+      <span class="ln"><span>Your AI.</span></span>
+      <span class="ln"><span>Your machine.</span></span>
+    </h1>
+    <p class="hero-sub">A local AI knowledge engine for professionals who cannot afford to hand their files to a stranger. Search by meaning. Chat with your documents. Everything runs on your hardware.</p>
+    <div class="hero-accent"></div>
+    <p class="hero-platforms">Windows<span>·</span>macOS<span>·</span>Linux</p>
+  </div>
+  <div class="scroll-cue"><div class="scroll-bar"></div><span>Scroll</span></div>
+</section>
+
+<!-- EVIDENCE BAR -->
+<div class="ev-bar" data-r>
+  <div class="w">
+    <div class="ev-row">
+      <div class="ev">
+        <div class="ev-num"><span class="a" data-count="3">0</span> hrs</div>
+        <div class="ev-label">Lost per day searching for files</div>
+        <div class="ev-src">Coveo, 2025</div>
+      </div>
+      <div class="ev">
+        <div class="ev-num">$<span data-count="5.7">0</span>M</div>
+        <div class="ev-label">Lost per 1,000 workers annually</div>
+        <div class="ev-src">IDC, 2014</div>
+      </div>
+      <div class="ev">
+        <div class="ev-num"><span class="a" data-count="72">0</span>%</div>
+        <div class="ev-label">Of breaches involve cloud data</div>
+        <div class="ev-src">IBM, 2025</div>
+      </div>
+      <div class="ev">
+        <div class="ev-num"><span data-count="85">0</span>%</div>
+        <div class="ev-label">Of stored data is dark or redundant</div>
+        <div class="ev-src">Veritas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<div class="div"></div>
+<section class="prob" id="problem">
+  <div class="w">
+    <div class="prob-top">
+      <div data-r>
+        <p class="label">The problem</p>
+        <h2 class="title">Cloud AI raises avoidable risk when your files are <em>the liability.</em></h2>
+        <p class="desc">When sensitive documents are indexed by third-party services, control and auditability can drop. In regulated workflows, that can increase compliance exposure and remediation cost.</p>
+      </div>
+      <div data-r data-d="200">
+        <p class="prob-quote">When third-party services process case files, privilege, access, and disclosure risk must be actively managed.</p>
+        <div class="stat-callout">
+          <div class="stat-callout-num">68%</div>
+          <div class="stat-callout-text">of organizations have experienced data leakage from employees sharing sensitive information with AI tools.</div>
+          <div class="stat-callout-src">Metomic Security Benchmark, 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="prob-grid">
+      <div class="pc" data-r data-d="100">
+        <svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Attorney-client privilege</h3>
+        <p>Consumer AI terms and data flows can create privilege and confidentiality risk for legal work, depending on jurisdiction and controls.</p>
+        <div class="pc-stat">29–40% of law firms have already experienced a breach</div>
+      </div>
+      <div class="pc" data-r data-d="200">
+        <svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <h3>Regulatory exposure</h3>
+        <p>Frameworks such as HIPAA, FERPA, CJIS, ITAR, and SOC 2 require strict data-handling controls. Cloud indexing often requires additional safeguards, contractual terms, and configuration to align with those obligations.</p>
+        <div class="pc-stat">Healthcare breaches average $7.42M per incident — IBM, 2025</div>
+      </div>
+      <div class="pc" data-r data-d="300">
+        <svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3>Keyword search fails</h3>
+        <p>Professionals succeed only 56% of the time when searching for information. The rest is wasted — or the document gets recreated from scratch.</p>
+        <div class="pc-stat">83% of workers recreate docs they cannot find — PwC</div>
+      </div>
+      <div class="pc" data-r data-d="400">
+        <svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        <h3>Vendor lock-in</h3>
+        <p>When your knowledge system depends on a subscription, your institutional memory leaves when the contract does. Local means you keep everything.</p>
+        <div class="pc-stat">27% of organizations have banned GenAI entirely — Cisco, 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="div"></div>
+<section class="feat" id="features">
+  <div class="w">
+    <div class="feat-intro" data-r>
+      <p class="label">Capabilities</p>
+      <h2 class="title">Understand your own work beyond what keyword search <em>can see.</em></h2>
+      <p class="desc" style="margin:0 auto">StratoSort reads the content of your files — not just filenames — using AI that runs entirely on your hardware.</p>
+    </div>
+    <div class="fg" data-r data-d="100">
+      <div class="fc">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <h3>Semantic Search</h3>
+        <p>Find files by meaning, not exact text. Query "non-compete clause" and surface relevant documents even when those words are not in the filename.</p>
+      </div>
+      <div class="fc">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <h3>Document Chat</h3>
+        <p>Ask questions about your files in plain language. StratoSort retrieves relevant context and generates grounded answers from your own documents.</p>
+      </div>
+      <div class="fc">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <h3>Knowledge Graph</h3>
+        <p>Visualize how your documents relate. See clusters, connections, and semantic neighborhoods across your entire file archive.</p>
+      </div>
+      <div class="fc">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <h3>File Routing</h3>
+        <p>Define categories in plain language. When new files arrive, StratoSort reads their content and moves them where they belong automatically.</p>
+      </div>
+      <div class="fc">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <h3>Vision and OCR</h3>
+        <p>Receipts, screenshots, scanned PDFs — computer vision and OCR read images and categorize them alongside your text documents.</p>
+      </div>
+      <div class="fc">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+        <h3>Full Undo / Redo</h3>
+        <p>File moves and renames are reversible with a reviewable action history, so you can inspect and roll back changes confidently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA INTERLUDE -->
+<div class="div"></div>
+<div class="interlude">
+  <div class="interlude-orb"></div>
+  <div class="w">
+    <div data-r>
+      <p class="label">The cost of digital disorganization</p>
+      <h2 class="title" style="max-width:600px;margin:0 auto 12px">The numbers behind the problem <em>you already feel.</em></h2>
+    </div>
+    <div class="interlude-grid" data-r data-d="150">
+      <div class="ig-card">
+        <div class="ig-num"><span class="a">83</span>%</div>
+        <div class="ig-text">of employees recreate documents they cannot find rather than continue searching.</div>
+        <div class="ig-src">PricewaterhouseCoopers</div>
+      </div>
+      <div class="ig-card">
+        <div class="ig-num"><span class="c">9.3</span> hrs</div>
+        <div class="ig-text">per week spent searching and gathering information — the equivalent of losing one employee out of every five.</div>
+        <div class="ig-src">McKinsey Global Institute</div>
+      </div>
+      <div class="ig-card">
+        <div class="ig-num">$<span class="a">220</span></div>
+        <div class="ig-text">average cost to reproduce a single lost document. 7.5% of all documents are lost entirely.</div>
+        <div class="ig-src">PricewaterhouseCoopers</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW -->
+<div class="div"></div>
+<section class="how" id="how">
+  <div class="w">
+    <div class="how-intro" data-r>
+      <p class="label">Setup</p>
+      <h2 class="title">Running in three steps.<br><em>No terminal required.</em></h2>
+    </div>
+    <div class="steps">
+      <div class="stp" data-r data-d="100">
+        <div class="stp-n">01</div>
+        <h3>Download the installer</h3>
+        <p>One file for Windows or macOS. No Python, Docker, API keys, or command line.</p>
+      </div>
+      <div class="stp" data-r data-d="200">
+        <div class="stp-n">02</div>
+        <h3>Choose a model profile</h3>
+        <p>Select a quality tier on first launch. StratoSort downloads models (2–5 GB, one time). GPU auto-detected.</p>
+      </div>
+      <div class="stp" data-r data-d="300">
+        <div class="stp-n">03</div>
+        <h3>Point it at your folders</h3>
+        <p>Select directories to index. Search, chat, and visualize as soon as indexing completes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<div class="div"></div>
+<section class="arch" id="architecture">
+  <div class="w">
+    <div class="arch-grid">
+      <div>
+        <div data-r>
+          <p class="label">Architecture</p>
+          <h2 class="title">Privacy is not a setting.<br><em>It is how the system is built.</em></h2>
+          <p class="desc" style="margin-bottom:56px">There is no toggle to turn off cloud sync. There is no cloud layer. StratoSort runs inference, vector search, and file operations in a single desktop process.</p>
+        </div>
+        <div class="arch-pts">
+          <div class="ap" data-r data-d="100"><div class="ap-bar"></div><div><h4>Local-first architecture</h4><p>After model download, core processing stays on-device. In standard configuration, StratoSort does not send document content to third-party services.</p></div></div>
+          <div class="ap" data-r data-d="200"><div class="ap-bar"></div><div><h4>In-process AI inference</h4><p>LLM inference runs inside the application via node-llama-cpp, without requiring third-party AI APIs for core workflows.</p></div></div>
+          <div class="ap" data-r data-d="300"><div class="ap-bar"></div><div><h4>Local vector search</h4><p>Embeddings generated and stored on-device using Orama. Your semantic index is a local file you own.</p></div></div>
+        </div>
+      </div>
+      <div data-r data-d="300">
+        <div class="arch-box">
+          <div class="arch-hdr"><div class="arch-hdr-dots"><div class="arch-hdr-dot"></div><div class="arch-hdr-dot"></div><div class="arch-hdr-dot"></div></div>System Architecture</div>
+          <div class="arch-body">
+            <div class="al"><span class="al-n">Your Files</span><span class="al-t">local filesystem</span></div><div class="al-arr">↓</div>
+            <div class="al"><span class="al-n">StratoSort Core</span><span class="al-t">electron process</span></div><div class="al-arr">↓</div>
+            <div class="al"><span class="al-n">node-llama-cpp</span><span class="al-t">in-process LLM</span></div><div class="al-arr">↓</div>
+            <div class="al"><span class="al-n">Orama</span><span class="al-t">vector + BM25</span></div><div class="al-arr">↓</div>
+            <div class="al"><span class="al-n">Tesseract.js</span><span class="al-t">OCR engine</span></div><div class="al-arr">↓</div>
+            <div class="al"><span class="al-n">Results</span><span class="al-t">rendered locally</span></div>
+          </div>
+          <div class="arch-ftr">No network boundary crossed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<div class="div"></div>
+<section class="uc" id="usecases">
+  <div class="w">
+    <div data-r>
+      <p class="label">Who it is for</p>
+      <h2 class="title">Built for professionals who cannot afford<br>to hand their files <em>to a stranger.</em></h2>
+    </div>
+    <div class="uc-grid">
+      <div class="ucc" data-r data-d="100">
+        <div class="ucc-role">Legal</div>
+        <h3>Find the clause across 10,000 files.</h3>
+        <p>Search case files, contracts, and discovery materials by meaning. Surface relevant precedent without remembering filenames while keeping analysis on infrastructure you control.</p>
+        <div class="ucc-stat">42% of legal professionals spend 2–5 hrs/day on admin tasks — LEAP, 2026</div>
+      </div>
+      <div class="ucc" data-r data-d="200">
+        <div class="ucc-role">Research</div>
+        <h3>Query your literature archive in plain language.</h3>
+        <p>Ask "which papers discuss transformer attention applied to genomics" across years of PDFs. Get grounded answers with source citations from your own collection.</p>
+        <div class="ucc-stat">90% of time creating "new" reports is spent recreating existing work — IDC</div>
+      </div>
+      <div class="ucc" data-r data-d="300">
+        <div class="ucc-role">Healthcare</div>
+        <h3>Organize clinical documentation with tighter data boundaries.</h3>
+        <p>Index and search patient notes, protocol documents, and compliance records on local infrastructure. Teams should validate HIPAA and vendor-risk requirements for their environment before deployment.</p>
+        <div class="ucc-stat">Physicians are 2.43x more likely to burn out from EHR overload — JMIR, 2024</div>
+      </div>
+      <div class="ucc" data-r data-d="400">
+        <div class="ucc-role">Financial Services</div>
+        <h3>Surface the version, the source, the number.</h3>
+        <p>Analysts working with earnings reports, SEC filings, and internal models can query across document types. Find the data point without opening fifty tabs.</p>
+        <div class="ucc-stat">Non-compliance costs 2.71x more than maintaining compliance — Gartner</div>
+      </div>
+    </div>
+    <p class="desc" style="max-width:760px;margin-top:28px">Compliance outcomes depend on deployment, configuration, policies, and legal obligations. This page is product information, not legal advice.</p>
+  </div>
+</section>
+
+<!-- FILE TYPES -->
+<div class="div"></div>
+<section class="ft" id="filetypes">
+  <div class="w">
+    <div data-r>
+      <p class="label">Compatibility</p>
+      <h2 class="title">60+ file types. <em>One index.</em></h2>
+    </div>
+    <div class="ft-groups" data-r data-d="100">
+      <div class="ft-group"><h4>Documents</h4><div class="ft-list"><span class="ft-tag">.pdf</span><span class="ft-tag">.docx</span><span class="ft-tag">.doc</span><span class="ft-tag">.xlsx</span><span class="ft-tag">.pptx</span><span class="ft-tag">.odt</span><span class="ft-tag">.epub</span><span class="ft-tag">.eml</span><span class="ft-tag">.msg</span></div></div>
+      <div class="ft-group"><h4>Code and Data</h4><div class="ft-list"><span class="ft-tag">.py</span><span class="ft-tag">.js</span><span class="ft-tag">.ts</span><span class="ft-tag">.json</span><span class="ft-tag">.csv</span><span class="ft-tag">.sql</span><span class="ft-tag">.yaml</span><span class="ft-tag">.xml</span><span class="ft-tag">.md</span></div></div>
+      <div class="ft-group"><h4>Images</h4><div class="ft-list"><span class="ft-tag">.jpg</span><span class="ft-tag">.png</span><span class="ft-tag">.gif</span><span class="ft-tag">.webp</span><span class="ft-tag">.svg</span><span class="ft-tag">.tiff</span><span class="ft-tag">.heic</span><span class="ft-tag">.bmp</span></div></div>
+      <div class="ft-group"><h4>Archives</h4><div class="ft-list"><span class="ft-tag">.zip</span><span class="ft-tag">.rar</span><span class="ft-tag">.7z</span><span class="ft-tag">.tar</span><span class="ft-tag">.gz</span><span class="ft-tag">.bz2</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<div class="div"></div>
+<section class="price" id="pricing">
+  <div class="w">
+    <div class="price-split">
+      <div class="price-lead" data-r>
+        <p class="label">Pricing</p>
+        <h2 class="title"><em>One license.</em><br>No per-seat.<br>No tiers.</h2>
+        <p class="desc">$99 per year for the full product. Every feature, unlimited files, no usage caps. One price because the architecture is simple — and your budget should be too.</p>
+      </div>
+      <div class="price-cards" data-r data-d="200">
+          <div class="price-card">
+            <div class="price-name">Professional License</div>
+            <div class="price-amt">$99</div>
+            <div class="price-per">/ year</div>
+            <ul class="price-list">
+              <li>All features included</li>
+              <li>Unlimited file indexing</li>
+              <li>Semantic search and document chat</li>
+              <li>Knowledge graph visualization</li>
+              <li>Vision and OCR processing</li>
+              <li>Licensed for commercial use</li>
+              <li>Designed for strict data-handling environments</li>
+              <li>Priority issue support</li>
+              <li>Invoice for expense reporting</li>
+            </ul>
+            <div class="price-context">
+              <p>IDC estimates document challenges cost $10,661 per worker per year. StratoSort costs less than a single hour of that loss.</p>
+            </div>
+          </div>
+          <div class="price-card price-card--beta">
+            <div class="price-name">Beta Tester Access</div>
+            <div class="price-amt">$0</div>
+            <div class="price-per">/ limited beta</div>
+            <ul class="price-list">
+              <li>Early access to new builds</li>
+              <li>Direct feedback channel to the team</li>
+              <li>Influence roadmap priorities</li>
+              <li>Help shape onboarding and workflows</li>
+            </ul>
+            <a class="price-btn" href="mailto:kennedyappliedsciences@gmail.com?subject=StratoSort%20Beta%20Tester%20Request">Become a beta tester</a>
+            <div class="price-context">
+              <p>Click to email the team and request access. Include your role, platform, and top use case.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="div"></div>
+<section class="cta">
+  <div class="cta-orb"></div>
+  <div class="w">
+    <div data-r>
+      <p class="label">Get started</p>
+      <h2 class="title">One installer. Local-first by design.<br><em>Built for control without cloud dependency.</em></h2>
+      <p class="desc" style="margin:0 auto">Your files stay on your machine and your knowledge becomes searchable. $99 per year — every feature included.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="w">
+    <div class="footer-inner">
+      <span class="footer-co">StratoSort is a product of Kennedy Applied Sciences, Inc.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== CONSTELLATION MESH — viewport buffer + document-space particles (avoids huge clearRect) =====
+(function(){
+  const c=document.getElementById('mesh'),ctx=c.getContext('2d',{alpha:true});
+  if(!ctx)return;
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData=Boolean(navigator.connection&&navigator.connection.saveData);
+  const lowPower=Boolean(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4);
+  if(reduceMotion||saveData||lowPower){c.style.display='none';return;}
+  let vw,vh,dpr=1,docH=0,lastDocMeasure=0,raf=0,pts=[];
+  const isMob=window.innerWidth<768;
+  const N=isMob?10:18,CD=isMob?96:120;
+  const CD2=CD*CD;
+
+  function docHeight(){return Math.max(document.documentElement.scrollHeight||0,document.body.scrollHeight||0,innerHeight);}
+  function refreshDocHeight(){docH=docHeight();lastDocMeasure=performance.now();}
+
+  function sizeCanvas(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    vw=innerWidth;
+    vh=innerHeight;
+    c.width=Math.floor(vw*dpr);
+    c.height=Math.floor(vh*dpr);
+    c.style.width=vw+'px';
+    c.style.height=vh+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  function init(){
+    sizeCanvas();
+    refreshDocHeight();
+    pts=Array.from({length:N},()=>({x:Math.random()*vw,y:Math.random()*docH,vx:(Math.random()-.5)*(isMob?.1:.16),vy:(Math.random()-.5)*(isMob?.1:.16),r:Math.random()*(isMob?.7:1)+.3,g:Math.random()<.06}));
+  }
+
+  const FRAME_MS=1000/30;
+  let lastTs=0;
+
+  function f(ts){
+    if(ts-lastTs<FRAME_MS){raf=requestAnimationFrame(f);return;}
+    lastTs=ts;
+    if(performance.now()-lastDocMeasure>900)refreshDocHeight();
+    if(scrollY>vh*1.35){ctx.clearRect(0,0,vw,vh);raf=requestAnimationFrame(f);return;}
+    ctx.clearRect(0,0,vw,vh);
+    const sy=scrollY;
+    const vt=sy-200,vbDoc=sy+vh+200;
+    for(let i=0;i<pts.length;i++){
+      const a=pts[i];
+      a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>vw)a.vx*=-1;
+      if(a.y<0||a.y>docH)a.vy*=-1;
+      if(a.y<vt||a.y>vbDoc)continue;
+      const cy=a.y-sy;
+      for(let j=i+1;j<pts.length;j++){
+        const b=pts[j];
+        if(b.y<vt||b.y>vbDoc)continue;
+        const dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
+        if(d2<CD2){
+          ctx.beginPath();ctx.moveTo(a.x,cy);ctx.lineTo(b.x,b.y-sy);
+          ctx.strokeStyle=`rgba(59,160,192,${(1-d2/CD2)*(isMob?.025:.035)})`;
+          ctx.lineWidth=.5;ctx.stroke();
+        }
+      }
+      ctx.beginPath();ctx.arc(a.x,cy,a.r,0,Math.PI*2);
+      ctx.fillStyle=a.g?'rgba(224,160,32,.35)':'rgba(59,160,192,.18)';
+      ctx.fill();
+    }
+    raf=requestAnimationFrame(f);
+  }
+
+  let resizeTimer;
+  addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(init,150)});
+  addEventListener('orientationchange',init);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){cancelAnimationFrame(raf);raf=0;return;}
+    if(!raf){refreshDocHeight();lastTs=0;raf=requestAnimationFrame(f);}
+  });
+  init();
+  raf=requestAnimationFrame(f);
+})();
+
+// ===== SCROLL REVEAL =====
+const obs=new IntersectionObserver(e=>{e.forEach(ent=>{if(ent.isIntersecting){const t=ent.target,d=t.getAttribute('data-d');if(d)t.style.transitionDelay=d+'ms';t.classList.add('on')}})},{threshold:0.06,rootMargin:'0px 0px 100px 0px'});
+document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
+
+// ===== COUNT UP =====
+const co=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(el=>{const t=parseFloat(el.getAttribute('data-count'));if(t===0){el.textContent='0';return}let c=0;const isFloat=t%1!==0;const step=isFloat?t/30:Math.max(1,Math.floor(t/35));const timer=setInterval(()=>{c+=step;if(c>=t){c=t;clearInterval(timer)}el.textContent=isFloat?c.toFixed(1):Math.round(c)},30)});co.disconnect()}})},{threshold:.3});
+co.observe(document.querySelector('.ev-bar'));
+
+// ===== MOBILE MENU =====
+const mobBtn=document.getElementById('mobBtn');
+const navR=document.getElementById('navR');
+mobBtn.addEventListener('click',e=>{e.stopPropagation();navR.classList.toggle('open');});
+document.querySelectorAll('#navR a').forEach(a=>{a.addEventListener('click',()=>navR.classList.remove('open'))});
+document.addEventListener('click',e=>{if(!navR.contains(e.target)&&!mobBtn.contains(e.target))navR.classList.remove('open')});
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;e.preventDefault();const t=document.querySelector(h);if(t)scrollTo({top:t.getBoundingClientRect().top+pageYOffset-80,behavior:'smooth'})})});
+
+</script>
+</body>
+</html>
