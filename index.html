@@ -137,23 +137,6 @@ section{padding:180px 0;position:relative}
 .fc h3{font-size:16px;font-weight:500;margin-bottom:14px;letter-spacing:-.01em}
 .fc p{font-size:14px;color:var(--t2);line-height:1.85}
 
-/* PRODUCT PREVIEW (single video — file: STRATOSORTVIDEOS/stratosort-product-ad.mp4) */
-.product-preview{background:var(--bg2)}
-.product-preview .w{max-width:1360px}
-.pp-intro{text-align:center;max-width:760px;margin:0 auto 72px}
-.pp-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
-.pp-card{grid-column:1/-1;background:rgba(17,30,42,.4);border:1px solid var(--b1);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:18px;transition:background .35s,border-color .35s}
-.pp-card:hover{background:rgba(17,30,42,.62);border-color:rgba(59,160,192,.18)}
-.pp-media{position:relative;border:1px solid var(--b1);border-radius:8px;overflow:hidden;background:#05090d;aspect-ratio:16/9;min-height:0}
-.pp-placeholder{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;gap:10px;background:#05090d}
-.pp-placeholder.is-hidden{display:none}
-.pp-placeholder-text{font-size:15px;color:var(--t1);font-weight:500;letter-spacing:-.01em}
-.pp-placeholder-sub{font-size:13px;color:var(--t2);line-height:1.65;max-width:360px}
-.pp-video{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;display:block;background:#05090d}
-.pp-label{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
-.pp-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
-.pp-copy{font-size:14px;color:var(--t2);line-height:1.75}
-
 /* DATA INTERLUDE */
 .interlude{background:var(--bg2);padding:140px 0;text-align:center;position:relative;overflow:hidden}
 .interlude-orb{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(59,160,192,.035) 0%,transparent 55%);pointer-events:none}
@@ -272,7 +255,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .ig-card{padding:44px 32px}
   .price-card{padding:56px 44px}
   .price-cards{grid-template-columns:1fr}
-  .pp-grid{gap:16px}
 }
 
 /* Tablet portrait */
@@ -319,7 +301,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .prob-top{grid-template-columns:1fr;gap:48px}
   .prob-grid{grid-template-columns:1fr}
   .fg{grid-template-columns:1fr}
-  .pp-grid{grid-template-columns:1fr}
   .interlude-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr;gap:56px}
   .steps::before{display:none}
@@ -335,11 +316,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc{padding:36px 28px}
   .fc{padding:40px 28px}
   .fc::before{top:16px;right:20px}
-  .pp-intro{margin-bottom:40px}
-  .pp-grid{gap:14px}
-  .pp-card{padding:16px;gap:12px}
-  .pp-title{font-size:17px}
-  .pp-copy{font-size:13px;line-height:1.6}
   .ucc{padding:40px 32px}
   .ucc h3{font-size:22px}
   .ig-card{padding:40px 28px}
@@ -392,8 +368,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc-icon{width:24px;height:24px;margin-bottom:20px}
   .fc{padding:36px 24px}
   .fc-icon{margin-bottom:24px}
-  .pp-card{padding:14px}
-  .pp-copy{font-size:12px;line-height:1.55}
   .ucc{padding:36px 28px}
   .ucc h3{font-size:20px}
   .ucc .ucc-stat{font-size:9px}
@@ -469,7 +443,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <a href="/" class="nav-mark">StratoSort</a>
     <ul class="nav-r" id="navR">
       <li><a href="#features">Features</a></li>
-      <li><a href="#preview">Preview</a></li>
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#usecases">Use Cases</a></li>
       <li><a href="#pricing">Pricing</a></li>
@@ -671,34 +644,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
         <h3>Point it at your folders</h3>
         <p>Select directories to index. Search, chat, and visualize as soon as indexing completes.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCT PREVIEW: add STRATOSORTVIDEOS/stratosort-product-ad.mp4 via GitHub (see STRATOSORTVIDEOS/README.md) -->
-<div class="div"></div>
-<section class="product-preview" id="preview">
-  <div class="w">
-    <div class="pp-intro" data-r>
-      <p class="label">Product preview</p>
-      <h2 class="title">See StratoSort in action <em>before you install.</em></h2>
-      <p class="desc" style="margin:0 auto">One short walkthrough. Plays muted in a loop; use controls for sound.</p>
-    </div>
-    <div class="pp-grid" data-r data-d="120">
-      <article class="pp-card">
-        <div class="pp-media">
-          <div class="pp-placeholder" id="productPreviewPlaceholder">
-            <p class="pp-placeholder-text">Video slot</p>
-            <p class="pp-placeholder-sub">Add <strong>stratosort-product-ad.mp4</strong> under <strong>STRATOSORTVIDEOS/</strong> in this repository, then refresh the site.</p>
-          </div>
-          <video class="pp-video" id="productPreviewVideo" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-label="StratoSort product preview video">
-            <source src="STRATOSORTVIDEOS/stratosort-product-ad.mp4" type="video/mp4">
-          </video>
-        </div>
-        <p class="pp-label">Product ad</p>
-        <h3 class="pp-title">StratoSort overview</h3>
-        <p class="pp-copy">Autoplays without sound and repeats. Turn on volume when you want the full mix.</p>
-      </article>
     </div>
   </div>
 </section>
@@ -961,34 +906,6 @@ document.addEventListener('click',e=>{if(!navR.contains(e.target)&&!mobBtn.conta
 
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;e.preventDefault();const t=document.querySelector(h);if(t)scrollTo({top:t.getBoundingClientRect().top+pageYOffset-80,behavior:'smooth'})})});
-
-// ===== PRODUCT PREVIEW VIDEO =====
-(function(){
-  const videoEl=document.getElementById('productPreviewVideo');
-  const placeholderEl=document.getElementById('productPreviewPlaceholder');
-  if(!videoEl)return;
-  function hidePlaceholder(){
-    if(placeholderEl)placeholderEl.classList.add('is-hidden');
-  }
-  function showPlaceholder(){
-    if(placeholderEl)placeholderEl.classList.remove('is-hidden');
-  }
-  function ensureMutedAutoplay(){
-    videoEl.muted=true;
-    videoEl.defaultMuted=true;
-    videoEl.playsInline=true;
-    videoEl.setAttribute('muted','');
-    videoEl.setAttribute('playsinline','');
-    videoEl.setAttribute('webkit-playsinline','');
-    const p=videoEl.play();
-    if(p&&typeof p.catch==='function')p.catch(()=>{});
-  }
-  videoEl.addEventListener('loadeddata',hidePlaceholder);
-  videoEl.addEventListener('canplay',hidePlaceholder);
-  videoEl.addEventListener('error',showPlaceholder);
-  ensureMutedAutoplay();
-  videoEl.addEventListener('loadedmetadata',ensureMutedAutoplay,{once:true});
-})();
 
 </script>
 </body>
