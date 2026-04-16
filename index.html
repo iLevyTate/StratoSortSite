@@ -137,51 +137,22 @@ section{padding:180px 0;position:relative}
 .fc h3{font-size:16px;font-weight:500;margin-bottom:14px;letter-spacing:-.01em}
 .fc p{font-size:14px;color:var(--t2);line-height:1.85}
 
-/* DEMO */
-.demo{background:var(--bg2)}
-.demo .w{max-width:1360px}
-.demo-intro{text-align:center;max-width:760px;margin:0 auto 72px}
-.demo-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
-.demo-card{grid-column:span 6;background:rgba(17,30,42,.4);border:1px solid var(--b1);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:18px;transition:background .35s,border-color .35s}
-.demo-card--feature{grid-column:1/-1}
-.demo-card:hover{background:rgba(17,30,42,.62);border-color:rgba(59,160,192,.18)}
-.demo-media{position:relative;border:1px solid var(--b1);border-radius:8px;overflow:hidden;background:#05090d;aspect-ratio:16/9;cursor:zoom-in}
-.demo-media::after{
-  content:'Click to expand';
-  position:absolute;
-  right:12px;
-  bottom:12px;
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--t1);
-  background:rgba(7,12,18,.78);
-  border:1px solid var(--b2);
-  border-radius:999px;
-  padding:6px 10px;
-  max-width:calc(100% - 24px);
-  white-space:nowrap;
-  opacity:.88;
-  pointer-events:none;
-  transition:opacity .25s,transform .25s,border-color .25s;
-}
-.demo-media:hover::after{opacity:1;border-color:rgba(59,160,192,.35);transform:translateY(-1px)}
-.demo-media:focus-visible{outline:2px solid rgba(59,160,192,.55);outline-offset:3px}
-.demo-card .demo-media{min-height:0}
-.demo-card--feature .demo-media{aspect-ratio:16/9;min-height:0}
-.demo-media img,.demo-media video{width:100%;height:100%;object-fit:contain;display:block}
-.demo-label{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
-.demo-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
-.demo-copy{font-size:14px;color:var(--t2);line-height:1.75}
-
-/* VIDEO LIGHTBOX */
-.video-modal{position:fixed;inset:0;z-index:1200;background:rgba(3,8,12,.88);display:flex;align-items:center;justify-content:center;padding:28px}
-.video-modal[hidden]{display:none}
-.video-modal-dialog{position:relative;width:min(1200px,96vw);max-height:90vh}
-.video-modal-close{position:absolute;top:-16px;right:-10px;width:38px;height:38px;border:1px solid var(--b2);border-radius:999px;background:rgba(7,12,18,.92);color:var(--t1);font-size:22px;line-height:1;cursor:pointer;z-index:2}
-.video-modal-close:hover{border-color:var(--cyan);color:var(--cyan)}
-.video-modal-player{width:100%;max-height:90vh;border:1px solid var(--b2);border-radius:12px;background:#02060a;display:block}
+/* PRODUCT PREVIEW (single video — file: STRATOSORTVIDEOS/stratosort-product-ad.mp4) */
+.product-preview{background:var(--bg2)}
+.product-preview .w{max-width:1360px}
+.pp-intro{text-align:center;max-width:760px;margin:0 auto 72px}
+.pp-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+.pp-card{grid-column:1/-1;background:rgba(17,30,42,.4);border:1px solid var(--b1);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:18px;transition:background .35s,border-color .35s}
+.pp-card:hover{background:rgba(17,30,42,.62);border-color:rgba(59,160,192,.18)}
+.pp-media{position:relative;border:1px solid var(--b1);border-radius:8px;overflow:hidden;background:#05090d;aspect-ratio:16/9;min-height:0}
+.pp-placeholder{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;gap:10px;background:#05090d}
+.pp-placeholder.is-hidden{display:none}
+.pp-placeholder-text{font-size:15px;color:var(--t1);font-weight:500;letter-spacing:-.01em}
+.pp-placeholder-sub{font-size:13px;color:var(--t2);line-height:1.65;max-width:360px}
+.pp-video{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;display:block;background:#05090d}
+.pp-label{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.pp-title{font-size:18px;font-weight:500;letter-spacing:-.01em}
+.pp-copy{font-size:14px;color:var(--t2);line-height:1.75}
 
 /* DATA INTERLUDE */
 .interlude{background:var(--bg2);padding:140px 0;text-align:center;position:relative;overflow:hidden}
@@ -301,9 +272,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .ig-card{padding:44px 32px}
   .price-card{padding:56px 44px}
   .price-cards{grid-template-columns:1fr}
-  .demo-grid{gap:16px}
-  .demo-card .demo-media{min-height:0}
-  .demo-card--feature .demo-media{min-height:0}
+  .pp-grid{gap:16px}
 }
 
 /* Tablet portrait */
@@ -350,7 +319,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .prob-top{grid-template-columns:1fr;gap:48px}
   .prob-grid{grid-template-columns:1fr}
   .fg{grid-template-columns:1fr}
-  .demo-grid{grid-template-columns:1fr}
+  .pp-grid{grid-template-columns:1fr}
   .interlude-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr;gap:56px}
   .steps::before{display:none}
@@ -366,22 +335,11 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc{padding:36px 28px}
   .fc{padding:40px 28px}
   .fc::before{top:16px;right:20px}
-  .demo-card{grid-column:1/-1}
-  .demo-intro{margin-bottom:40px}
-  .demo-grid{gap:14px}
-  .demo-card{padding:16px;gap:12px}
-  .demo-card .demo-media{min-height:0}
-  .demo-card--feature .demo-media{min-height:0}
-  .demo-title{font-size:17px}
-  .demo-copy{font-size:13px;line-height:1.6}
-  .demo-media::after{
-    content:'Tap to expand';
-    right:8px;
-    bottom:8px;
-    font-size:8px;
-    padding:5px 8px;
-    letter-spacing:.06em;
-  }
+  .pp-intro{margin-bottom:40px}
+  .pp-grid{gap:14px}
+  .pp-card{padding:16px;gap:12px}
+  .pp-title{font-size:17px}
+  .pp-copy{font-size:13px;line-height:1.6}
   .ucc{padding:40px 32px}
   .ucc h3{font-size:22px}
   .ig-card{padding:40px 28px}
@@ -434,10 +392,8 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc-icon{width:24px;height:24px;margin-bottom:20px}
   .fc{padding:36px 24px}
   .fc-icon{margin-bottom:24px}
-  .demo-card{padding:14px}
-  .demo-card .demo-media{min-height:0}
-  .demo-card--feature .demo-media{min-height:0}
-  .demo-copy{font-size:12px;line-height:1.55}
+  .pp-card{padding:14px}
+  .pp-copy{font-size:12px;line-height:1.55}
   .ucc{padding:36px 28px}
   .ucc h3{font-size:20px}
   .ucc .ucc-stat{font-size:9px}
@@ -513,7 +469,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <a href="/" class="nav-mark">StratoSort</a>
     <ul class="nav-r" id="navR">
       <li><a href="#features">Features</a></li>
-      <li><a href="#demo">Demo</a></li>
+      <li><a href="#preview">Preview</a></li>
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#usecases">Use Cases</a></li>
       <li><a href="#pricing">Pricing</a></li>
@@ -719,81 +675,29 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- DEMO -->
+<!-- PRODUCT PREVIEW: add STRATOSORTVIDEOS/stratosort-product-ad.mp4 via GitHub (see STRATOSORTVIDEOS/README.md) -->
 <div class="div"></div>
-<section class="demo" id="demo">
+<section class="product-preview" id="preview">
   <div class="w">
-    <div class="demo-intro" data-r>
+    <div class="pp-intro" data-r>
       <p class="label">Product preview</p>
       <h2 class="title">See StratoSort in action <em>before you install.</em></h2>
-      <p class="desc" style="margin:0 auto">A curated set of the most important clips: full workflow, setup, ingestion, review, semantic search, and document chat.</p>
+      <p class="desc" style="margin:0 auto">One short walkthrough. Plays muted in a loop; use controls for sound.</p>
     </div>
-    <div class="demo-grid" data-r data-d="120">
-      <article class="demo-card demo-card--feature">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort end to end workflow demonstration">
-            <source src="STRATOSORTVIDEOS/Part_09_End_to_End_Workflow_Demonstration.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
+    <div class="pp-grid" data-r data-d="120">
+      <article class="pp-card">
+        <div class="pp-media">
+          <div class="pp-placeholder" id="productPreviewPlaceholder">
+            <p class="pp-placeholder-text">Video slot</p>
+            <p class="pp-placeholder-sub">Add <strong>stratosort-product-ad.mp4</strong> under <strong>STRATOSORTVIDEOS/</strong> in this repository, then refresh the site.</p>
+          </div>
+          <video class="pp-video" id="productPreviewVideo" autoplay muted loop playsinline webkit-playsinline preload="metadata" aria-label="StratoSort product preview video">
+            <source src="STRATOSORTVIDEOS/stratosort-product-ad.mp4" type="video/mp4">
           </video>
         </div>
-        <p class="demo-label">Part 09</p>
-        <h3 class="demo-title">End-to-end workflow demonstration</h3>
-        <p class="demo-copy">See the full journey from ingestion to AI-assisted organization and retrieval in one continuous flow.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort file discovery and AI analysis">
-            <source src="STRATOSORTVIDEOS/Part_03_File_Discovery_and_AI_Analysis.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 03</p>
-        <h3 class="demo-title">File discovery and AI analysis</h3>
-        <p class="demo-copy">Watch ingestion, document understanding, and early classification decisions happen automatically.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort review queue and automated organization">
-            <source src="STRATOSORTVIDEOS/Part_04_Review_Queue_and_Automated_Organization.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 04</p>
-        <h3 class="demo-title">Review queue and automation</h3>
-        <p class="demo-copy">Approve, adjust, and apply bulk organization actions with a human-in-the-loop workflow.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort semantic search and graph visualization">
-            <source src="STRATOSORTVIDEOS/Part_06_Semantic_Search_and_Graph_Visualization.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 06</p>
-        <h3 class="demo-title">Semantic search and graph visualization</h3>
-        <p class="demo-copy">Explore related documents by meaning, then navigate clusters and relationships in the knowledge graph.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort conversational chat context">
-            <source src="STRATOSORTVIDEOS/Part_07_Conversational_Chat_Context.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Part 07</p>
-        <h3 class="demo-title">Conversational chat with context</h3>
-        <p class="demo-copy">Ask questions in plain language and get grounded answers from your own indexed documents.</p>
-      </article>
-      <article class="demo-card">
-        <div class="demo-media">
-          <video autoplay loop muted playsinline preload="metadata" aria-label="StratoSort wizard choosing local AI models">
-            <source src="STRATOSORTVIDEOS/Wizard_01_Choosing_Local_AI_Models.mp4" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
-        </div>
-        <p class="demo-label">Wizard 01</p>
-        <h3 class="demo-title">Choose local AI models</h3>
-        <p class="demo-copy">Select model profiles based on quality needs and available compute.</p>
+        <p class="pp-label">Product ad</p>
+        <h3 class="pp-title">StratoSort overview</h3>
+        <p class="pp-copy">Autoplays without sound and repeats. Turn on volume when you want the full mix.</p>
       </article>
     </div>
   </div>
@@ -960,13 +864,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </footer>
 
-<div class="video-modal" id="videoModal" hidden aria-hidden="true">
-  <div class="video-modal-dialog">
-    <button class="video-modal-close" id="videoModalClose" aria-label="Close expanded video">&times;</button>
-    <video class="video-modal-player" id="videoModalPlayer" controls autoplay loop playsinline preload="metadata"></video>
-  </div>
-</div>
-
 <script>
 // ===== CONSTELLATION MESH — viewport buffer + document-space particles (avoids huge clearRect) =====
 (function(){
@@ -1065,55 +962,34 @@ document.addEventListener('click',e=>{if(!navR.contains(e.target)&&!mobBtn.conta
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;e.preventDefault();const t=document.querySelector(h);if(t)scrollTo({top:t.getBoundingClientRect().top+pageYOffset-80,behavior:'smooth'})})});
 
-// ===== VIDEO LIGHTBOX =====
-const videoModal=document.getElementById('videoModal');
-const videoModalPlayer=document.getElementById('videoModalPlayer');
-const videoModalClose=document.getElementById('videoModalClose');
-const demoVideos=document.querySelectorAll('.demo-media video');
-
-function openVideoModal(videoEl){
+// ===== PRODUCT PREVIEW VIDEO =====
+(function(){
+  const videoEl=document.getElementById('productPreviewVideo');
+  const placeholderEl=document.getElementById('productPreviewPlaceholder');
   if(!videoEl)return;
-  const src=videoEl.currentSrc||videoEl.querySelector('source')?.src;
-  if(!src)return;
-  demoVideos.forEach(v=>v.pause());
-  videoModalPlayer.src=src;
-  videoModalPlayer.currentTime=videoEl.currentTime||0;
-  videoModalPlayer.muted=videoEl.muted;
-  videoModal.hidden=false;
-  videoModal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-  void videoModalPlayer.play().catch(()=>{});
-}
+  function hidePlaceholder(){
+    if(placeholderEl)placeholderEl.classList.add('is-hidden');
+  }
+  function showPlaceholder(){
+    if(placeholderEl)placeholderEl.classList.remove('is-hidden');
+  }
+  function ensureMutedAutoplay(){
+    videoEl.muted=true;
+    videoEl.defaultMuted=true;
+    videoEl.playsInline=true;
+    videoEl.setAttribute('muted','');
+    videoEl.setAttribute('playsinline','');
+    videoEl.setAttribute('webkit-playsinline','');
+    const p=videoEl.play();
+    if(p&&typeof p.catch==='function')p.catch(()=>{});
+  }
+  videoEl.addEventListener('loadeddata',hidePlaceholder);
+  videoEl.addEventListener('canplay',hidePlaceholder);
+  videoEl.addEventListener('error',showPlaceholder);
+  ensureMutedAutoplay();
+  videoEl.addEventListener('loadedmetadata',ensureMutedAutoplay,{once:true});
+})();
 
-function closeVideoModal(){
-  if(videoModal.hidden)return;
-  videoModalPlayer.pause();
-  videoModalPlayer.removeAttribute('src');
-  videoModalPlayer.load();
-  videoModal.hidden=true;
-  videoModal.setAttribute('aria-hidden','true');
-  document.body.style.overflow='';
-  demoVideos.forEach(v=>{if(v.paused){void v.play().catch(()=>{});}});
-}
-
-demoVideos.forEach(videoEl=>{
-  const media=videoEl.closest('.demo-media');
-  if(!media)return;
-  media.setAttribute('role','button');
-  media.setAttribute('tabindex','0');
-  media.setAttribute('aria-label','Expand video');
-  media.addEventListener('click',()=>openVideoModal(videoEl));
-  media.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){
-      e.preventDefault();
-      openVideoModal(videoEl);
-    }
-  });
-});
-
-videoModalClose.addEventListener('click',closeVideoModal);
-videoModal.addEventListener('click',e=>{if(e.target===videoModal)closeVideoModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVideoModal();});
 </script>
 </body>
 </html>
