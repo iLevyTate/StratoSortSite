@@ -169,17 +169,6 @@ section{padding:180px 0;position:relative}
 .ap:hover .ap-bar{opacity:.7}
 .ap h4{font-size:16px;font-weight:500;margin-bottom:8px}
 .ap p{font-size:14px;color:var(--t2);line-height:1.8}
-.arch-box{border:1px solid var(--b2);border-radius:12px;overflow:hidden;position:relative;background:var(--bg2)}
-.arch-box::before{content:'';position:absolute;top:-1px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(59,160,192,.18),transparent)}
-.arch-hdr{padding:18px 28px;border-bottom:1px solid var(--b1);font-family:var(--mono);font-size:9px;color:var(--t3);letter-spacing:.14em;text-transform:uppercase;background:rgba(8,14,20,.5);display:flex;align-items:center;gap:12px}
-.arch-hdr-dots{display:flex;gap:5px}
-.arch-hdr-dot{width:6px;height:6px;border-radius:50%;background:var(--t3);opacity:.25}
-.arch-body{padding:16px}
-.al{border:1px solid var(--b1);border-radius:6px;padding:15px 22px;margin-bottom:3px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:12px;transition:all .35s var(--ease);cursor:default}
-.al:hover{border-color:rgba(59,160,192,.18);background:rgba(59,160,192,.015);transform:translateX(8px);box-shadow:-4px 0 0 rgba(59,160,192,.6)}
-.al-n{color:var(--t1);letter-spacing:.02em}.al-t{color:var(--t3);font-size:10px;letter-spacing:.06em}
-.al-arr{text-align:center;padding:2px 0;color:var(--t3);font-size:9px;opacity:.2}
-.arch-ftr{padding:18px 28px;border-top:1px solid var(--b1);text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:rgba(224,160,32,.015);color:var(--gold);opacity:.7}
 
 /* USE CASES */
 .uc{background:var(--bg)}
@@ -403,11 +392,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .ap{gap:16px}
   .ap h4{font-size:15px}
   .ap p{font-size:13px}
-  .al{padding:12px 14px;font-size:10px;flex-wrap:wrap;gap:4px}
-  .al-t{font-size:8px}
-  .arch-hdr{padding:14px 16px;font-size:8px}
-  .arch-ftr{padding:14px 16px;font-size:8px}
-  .arch-body{padding:10px}
 
   .nav-mark{font-size:13px}
   .nav-mark::after{display:none}
@@ -665,19 +649,10 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
           <div class="ap" data-r data-d="300"><div class="ap-bar"></div><div><h4>Local vector search</h4><p>Embeddings generated and stored on-device using Orama. Your semantic index is a local file you own.</p></div></div>
         </div>
       </div>
-      <div data-r data-d="300">
-        <div class="arch-box">
-          <div class="arch-hdr"><div class="arch-hdr-dots"><div class="arch-hdr-dot"></div><div class="arch-hdr-dot"></div><div class="arch-hdr-dot"></div></div>System Architecture</div>
-          <div class="arch-body">
-            <div class="al"><span class="al-n">Your Files</span><span class="al-t">local filesystem</span></div><div class="al-arr">↓</div>
-            <div class="al"><span class="al-n">StratoSort Core</span><span class="al-t">electron process</span></div><div class="al-arr">↓</div>
-            <div class="al"><span class="al-n">node-llama-cpp</span><span class="al-t">in-process LLM</span></div><div class="al-arr">↓</div>
-            <div class="al"><span class="al-n">Orama</span><span class="al-t">vector + BM25</span></div><div class="al-arr">↓</div>
-            <div class="al"><span class="al-n">Tesseract.js</span><span class="al-t">OCR engine</span></div><div class="al-arr">↓</div>
-            <div class="al"><span class="al-n">Results</span><span class="al-t">rendered locally</span></div>
-          </div>
-          <div class="arch-ftr">No network boundary crossed</div>
-        </div>
+      <div class="arch-pts" data-r data-d="300">
+        <div class="ap"><div class="ap-bar"></div><div><h4>Local-first architecture</h4><p>After model download, core processing stays on-device. In standard configuration, StratoSort does not send document content to third-party services.</p></div></div>
+        <div class="ap"><div class="ap-bar"></div><div><h4>In-process AI inference</h4><p>LLM inference runs inside the application via node-llama-cpp, without requiring third-party AI APIs for core workflows.</p></div></div>
+        <div class="ap"><div class="ap-bar"></div><div><h4>Local vector search</h4><p>Embeddings generated and stored on-device using Orama. Your semantic index is a local file you own.</p></div></div>
       </div>
     </div>
   </div>
