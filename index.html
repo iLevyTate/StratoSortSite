@@ -5,10 +5,99 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StratoSort — Your files. Your AI. Your machine.</title>
 <meta name="description" content="A local AI knowledge engine for professionals who work with sensitive documents. Semantic search, document chat, and knowledge graphs — all running on your machine.">
+<meta name="keywords" content="local AI, on-device AI, semantic search, document chat, knowledge graph, private AI, file organization, RAG, legal AI, healthcare AI, HIPAA, privacy-first">
+<meta name="author" content="Kennedy Applied Sciences, Inc.">
+<meta name="theme-color" content="#070C12">
+<meta name="color-scheme" content="dark">
+<meta name="application-name" content="StratoSort">
+<meta name="apple-mobile-web-app-title" content="StratoSort">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="robots" content="index, follow, max-image-preview:large">
+
+<link rel="canonical" href="https://stratosort.com/">
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-mark.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/icon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="mask-icon" href="/assets/logo-mark.svg" color="#3BA0C0">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StratoSort">
+<meta property="og:title" content="StratoSort — Your files. Your AI. Your machine.">
+<meta property="og:description" content="A local AI knowledge engine for professionals who cannot afford to hand their files to a stranger. Semantic search, document chat, and knowledge graphs — running on your machine.">
+<meta property="og:url" content="https://stratosort.com/">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://stratosort.com/assets/og-image.png">
+<meta property="og:image:secure_url" content="https://stratosort.com/assets/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="StratoSort — local AI knowledge engine">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StratoSort — Your files. Your AI. Your machine.">
+<meta name="twitter:description" content="A local AI knowledge engine for professionals who work with sensitive documents. Semantic search, document chat, knowledge graphs — on your hardware.">
+<meta name="twitter:image" content="https://stratosort.com/assets/twitter-card.png">
+<meta name="twitter:image:alt" content="StratoSort logo on a dark background">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/assets/logo-mark.svg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"></noscript>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://stratosort.com/#org",
+      "name": "Kennedy Applied Sciences, Inc.",
+      "url": "https://stratosort.com/",
+      "logo": "https://stratosort.com/assets/icon-512.png"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://stratosort.com/#website",
+      "url": "https://stratosort.com/",
+      "name": "StratoSort",
+      "publisher": { "@id": "https://stratosort.com/#org" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "StratoSort",
+      "operatingSystem": "Windows, macOS, Linux",
+      "applicationCategory": "BusinessApplication",
+      "description": "A local AI knowledge engine for professionals: semantic search, document chat, and knowledge-graph visualization that runs entirely on your machine.",
+      "url": "https://stratosort.com/",
+      "image": "https://stratosort.com/assets/og-image.png",
+      "publisher": { "@id": "https://stratosort.com/#org" },
+      "offers": {
+        "@type": "Offer",
+        "price": "99",
+        "priceCurrency": "USD",
+        "category": "Annual subscription"
+      }
+    }
+  ]
+}
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -438,9 +527,9 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
 
 <canvas id="mesh" aria-hidden="true"></canvas>
 
-<nav>
+<nav aria-label="Primary">
   <div class="w">
-    <a href="/" class="nav-mark">StratoSort</a>
+    <a href="/" class="nav-mark" aria-label="StratoSort home">StratoSort</a>
     <ul class="nav-r" id="navR">
       <li><a href="#features">Features</a></li>
       <li><a href="#architecture">Architecture</a></li>
