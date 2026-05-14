@@ -34,7 +34,6 @@ body::after{content:'';position:fixed;inset:0;z-index:10000;pointer-events:none;
   .hero h1 .ln{overflow:visible}
 }
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(7,12,18,.9);border-bottom:1px solid var(--b1)}
 nav .w{display:flex;align-items:center;justify-content:space-between;height:100%}
 .nav-mark{text-decoration:none;color:var(--t1);font-weight:500;font-size:14px;letter-spacing:.1em;text-transform:uppercase;position:relative;padding-left:0}
@@ -45,7 +44,6 @@ nav .w{display:flex;align-items:center;justify-content:space-between;height:100%
 .nav-r a:hover{color:var(--t1)}.nav-r a:hover::after{transform:scaleX(1)}
 .mob-btn{display:none;background:none;border:none;color:var(--t1);cursor:pointer;padding:8px}
 
-/* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:72px 0 0}
 canvas#mesh{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;height:100%}
 .orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;max-width:100vw}
@@ -78,7 +76,6 @@ canvas#mesh{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;heig
 @keyframes sb{0%,100%{opacity:.2;transform:scaleY(1)}50%{opacity:.6;transform:scaleY(.5);transform-origin:top}}
 .scroll-cue span{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:.2em;text-transform:uppercase}
 
-/* EVIDENCE BAR */
 .ev-bar{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:72px 0;background:var(--bg2);position:relative;z-index:1;overflow:hidden}
 .ev-bar::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:linear-gradient(90deg,transparent,rgba(224,160,32,.08),transparent)}
 .ev-row{display:flex;justify-content:center;align-items:center;gap:88px;flex-wrap:wrap}
@@ -88,7 +85,6 @@ canvas#mesh{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;heig
 .ev-label{font-family:var(--mono);font-size:9px;color:var(--t2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
 .ev-src{font-family:var(--mono);font-size:8px;color:var(--t3);opacity:.4;letter-spacing:.04em}
 
-/* SECTIONS */
 section{padding:180px 0;position:relative}
 .div{height:1px;position:relative;z-index:1;background:var(--b1);overflow:visible}
 .div::after{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:linear-gradient(90deg,transparent,rgba(59,160,192,.1),transparent)}
@@ -97,7 +93,6 @@ section{padding:180px 0;position:relative}
 .title em{font-family:var(--serif);font-style:italic;color:var(--gold);letter-spacing:-.02em}
 .desc{font-size:16px;color:var(--t2);max-width:480px;line-height:1.8}
 
-/* PROBLEM */
 .prob{background:var(--bg2)}
 .prob-top{display:grid;grid-template-columns:1.1fr .9fr;gap:120px;align-items:start}
 .prob-quote{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.4vw,32px);color:var(--t1);line-height:1.35;position:relative;padding-left:40px;margin-top:8px}
@@ -122,7 +117,6 @@ section{padding:180px 0;position:relative}
 .pc .pc-stat{font-family:var(--mono);font-size:10px;color:var(--cyan);margin-top:20px;opacity:.5;transition:opacity .3s;letter-spacing:.02em}
 .pc:hover .pc-stat{opacity:.75}
 
-/* FEATURES */
 .feat{background:var(--bg)}
 .feat-intro{text-align:center;max-width:620px;margin:0 auto 100px}
 .fg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border-radius:10px;overflow:hidden}
@@ -137,7 +131,6 @@ section{padding:180px 0;position:relative}
 .fc h3{font-size:16px;font-weight:500;margin-bottom:14px;letter-spacing:-.01em}
 .fc p{font-size:14px;color:var(--t2);line-height:1.85}
 
-/* DATA INTERLUDE */
 .interlude{background:var(--bg2);padding:140px 0;text-align:center;position:relative;overflow:hidden}
 .interlude-orb{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:700px;height:450px;background:radial-gradient(ellipse,rgba(59,160,192,.035) 0%,transparent 55%);pointer-events:none}
 .interlude-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border-radius:10px;overflow:hidden;margin-top:88px}
@@ -149,7 +142,6 @@ section{padding:180px 0;position:relative}
 .ig-text{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px}
 .ig-src{font-family:var(--mono);font-size:8px;color:var(--t3);opacity:.4;letter-spacing:.06em}
 
-/* HOW */
 .how{background:var(--bg)}
 .how-intro{text-align:center;max-width:540px;margin:0 auto 100px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
@@ -160,7 +152,6 @@ section{padding:180px 0;position:relative}
 .stp h3{font-size:18px;font-weight:500;margin-bottom:12px;letter-spacing:-.01em}
 .stp p{font-size:14px;color:var(--t2);line-height:1.8}
 
-/* ARCH */
 .arch{background:var(--bg2);overflow:hidden}
 .arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
 .arch-pts{display:flex;flex-direction:column;gap:44px}
@@ -181,7 +172,6 @@ section{padding:180px 0;position:relative}
 .al-arr{text-align:center;padding:2px 0;color:var(--t3);font-size:9px;opacity:.2}
 .arch-ftr{padding:18px 28px;border-top:1px solid var(--b1);text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:rgba(224,160,32,.015);color:var(--gold);opacity:.7}
 
-/* USE CASES */
 .uc{background:var(--bg)}
 .uc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:100px;background:var(--b1);border-radius:8px;overflow:hidden}
 .ucc{background:var(--bg);padding:56px 52px;transition:background .4s;position:relative}
@@ -195,7 +185,6 @@ section{padding:180px 0;position:relative}
 .ucc .ucc-stat{font-family:var(--mono);font-size:10px;color:var(--gold);margin-top:24px;opacity:.5;transition:opacity .3s;letter-spacing:.02em}
 .ucc:hover .ucc-stat{opacity:.75}
 
-/* PRICING */
 .price{background:var(--bg2)}
 .price-split{display:flex;flex-direction:column;gap:52px}
 .price-lead{max-width:680px;margin:0 auto;text-align:center}
@@ -220,7 +209,6 @@ section{padding:180px 0;position:relative}
 .price-context{margin-top:24px;padding-top:24px;border-top:1px solid rgba(224,160,32,.06)}
 .price-context p{font-size:11px;color:var(--t3);line-height:1.7;font-family:var(--mono);letter-spacing:.02em;opacity:.6}
 
-/* FILE TYPES */
 .ft{background:var(--bg)}
 .ft-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:56px;margin-top:88px}
 .ft-group h4{font-size:11px;font-weight:500;margin-bottom:24px;color:var(--t2);letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
@@ -228,18 +216,14 @@ section{padding:180px 0;position:relative}
 .ft-tag{font-family:var(--mono);font-size:11px;color:var(--cyan);opacity:.55;background:rgba(59,160,192,.02);padding:6px 12px;border-radius:4px;border:1px solid rgba(59,160,192,.05);transition:all .25s var(--ease);cursor:default}
 .ft-tag:hover{opacity:1;background:rgba(59,160,192,.06);border-color:rgba(59,160,192,.14);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.2)}
 
-/* CTA */
 .cta{padding:220px 0;text-align:center;position:relative;overflow:hidden}
 .cta-orb{position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(224,160,32,.035) 0%,transparent 50%);pointer-events:none}
 .cta .title{max-width:640px;margin:0 auto 28px}.cta .desc{max-width:440px;margin:0 auto}
 
-/* FOOTER */
 footer{border-top:1px solid var(--b1);padding:44px 0;position:relative}
 footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;background:linear-gradient(90deg,transparent,rgba(224,160,32,.06),transparent)}
 .footer-inner{display:flex;align-items:center;justify-content:center}
 .footer-co{font-size:11px;color:var(--t3);letter-spacing:.03em;opacity:.6}
-
-/* RESPONSIVE */
 
 /* Tablet landscape */
 @media(max-width:1024px){
@@ -335,7 +319,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   /* Steps */
   .stp-n{width:88px;height:88px;font-size:13px;margin-bottom:28px}
 
-  /* CTA */
+  
   .cta{padding:120px 0}
 
   /* Footer */
@@ -471,7 +455,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   <div class="scroll-cue"><div class="scroll-bar"></div><span>Scroll</span></div>
 </section>
 
-<!-- EVIDENCE BAR -->
 <div class="ev-bar" data-r>
   <div class="w">
     <div class="ev-row">
@@ -499,7 +482,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </div>
 
-<!-- PROBLEM -->
 <div class="div"></div>
 <section class="prob" id="problem">
   <div class="w">
@@ -547,7 +529,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- FEATURES -->
 <div class="div"></div>
 <section class="feat" id="features">
   <div class="w">
@@ -591,7 +572,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- DATA INTERLUDE -->
 <div class="div"></div>
 <div class="interlude">
   <div class="interlude-orb"></div>
@@ -620,7 +600,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </div>
 
-<!-- HOW -->
 <div class="div"></div>
 <section class="how" id="how">
   <div class="w">
@@ -648,7 +627,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- ARCHITECTURE -->
 <div class="div"></div>
 <section class="arch" id="architecture">
   <div class="w">
@@ -683,7 +661,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- USE CASES -->
 <div class="div"></div>
 <section class="uc" id="usecases">
   <div class="w">
@@ -721,7 +698,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- FILE TYPES -->
 <div class="div"></div>
 <section class="ft" id="filetypes">
   <div class="w">
@@ -738,7 +714,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- PRICING -->
 <div class="div"></div>
 <section class="price" id="pricing">
   <div class="w">
@@ -788,7 +763,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   </div>
 </section>
 
-<!-- CTA -->
 <div class="div"></div>
 <section class="cta">
   <div class="cta-orb"></div>
@@ -810,7 +784,6 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
 </footer>
 
 <script>
-// ===== CONSTELLATION MESH — viewport buffer + document-space particles (avoids huge clearRect) =====
 (function(){
   const c=document.getElementById('mesh'),ctx=c.getContext('2d',{alpha:true});
   if(!ctx)return;
@@ -889,22 +862,18 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   raf=requestAnimationFrame(f);
 })();
 
-// ===== SCROLL REVEAL =====
 const obs=new IntersectionObserver(e=>{e.forEach(ent=>{if(ent.isIntersecting){const t=ent.target,d=t.getAttribute('data-d');if(d)t.style.transitionDelay=d+'ms';t.classList.add('on')}})},{threshold:0.06,rootMargin:'0px 0px 100px 0px'});
 document.querySelectorAll('[data-r]').forEach(el=>obs.observe(el));
 
-// ===== COUNT UP =====
 const co=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(el=>{const t=parseFloat(el.getAttribute('data-count'));if(t===0){el.textContent='0';return}let c=0;const isFloat=t%1!==0;const step=isFloat?t/30:Math.max(1,Math.floor(t/35));const timer=setInterval(()=>{c+=step;if(c>=t){c=t;clearInterval(timer)}el.textContent=isFloat?c.toFixed(1):Math.round(c)},30)});co.disconnect()}})},{threshold:.3});
 co.observe(document.querySelector('.ev-bar'));
 
-// ===== MOBILE MENU =====
 const mobBtn=document.getElementById('mobBtn');
 const navR=document.getElementById('navR');
 mobBtn.addEventListener('click',e=>{e.stopPropagation();navR.classList.toggle('open');});
 document.querySelectorAll('#navR a').forEach(a=>{a.addEventListener('click',()=>navR.classList.remove('open'))});
 document.addEventListener('click',e=>{if(!navR.contains(e.target)&&!mobBtn.contains(e.target))navR.classList.remove('open')});
 
-// ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const h=this.getAttribute('href');if(h==='#')return;e.preventDefault();const t=document.querySelector(h);if(t)scrollTo({top:t.getBoundingClientRect().top+pageYOffset-80,behavior:'smooth'})})});
 
 </script>
