@@ -5,6 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>StratoSort — Your files. Your AI. Your machine.</title>
 <meta name="description" content="A local AI knowledge engine for professionals who work with sensitive documents. Semantic search, document chat, and knowledge graphs — all running on your machine.">
+<link rel="canonical" href="https://stratosort.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="StratoSort">
+<meta property="og:url" content="https://stratosort.com/">
+<meta property="og:title" content="StratoSort — Your files. Your AI. Your machine.">
+<meta property="og:description" content="A local AI knowledge engine for professionals who work with sensitive documents. Semantic search, document chat, and knowledge graphs — all running on your machine.">
+<meta property="og:image" content="https://stratosort.com/assets/social-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="StratoSort on a desk between stacks of unsorted paper, screen showing a burst of documents being organized.">
+<meta property="og:video" content="https://stratosort.com/assets/strato-ad.mp4">
+<meta property="og:video:secure_url" content="https://stratosort.com/assets/strato-ad.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta property="og:video:width" content="1920">
+<meta property="og:video:height" content="1200">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="StratoSort — Your files. Your AI. Your machine.">
+<meta name="twitter:description" content="A local AI knowledge engine for professionals who work with sensitive documents. Runs entirely on your hardware.">
+<meta name="twitter:image" content="https://stratosort.com/assets/social-card.jpg">
+<meta name="twitter:image:alt" content="StratoSort on a desk between stacks of unsorted paper, screen showing a burst of documents being organized.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -77,6 +102,14 @@ canvas#mesh{position:fixed;inset:0;z-index:0;pointer-events:none;width:100%;heig
 @keyframes sb{0%,100%{opacity:.2;transform:scaleY(1)}50%{opacity:.6;transform:scaleY(.5);transform-origin:top}}
 .scroll-cue span{font-family:var(--mono);font-size:8px;color:var(--t3);letter-spacing:.2em;text-transform:uppercase}
 
+/* PRODUCT AD */
+.ad{background:var(--bg);padding:120px 0 80px;position:relative}
+.ad .w{padding:0 48px}
+.ad-frame{position:relative;max-width:1080px;margin:0 auto;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(59,160,192,.15),0 0 60px rgba(59,160,192,.04);transition:transform .6s var(--ease),box-shadow .6s var(--ease)}
+.ad-frame:hover{transform:translateY(-2px);box-shadow:0 40px 100px rgba(0,0,0,.55),0 0 0 1px rgba(59,160,192,.22),0 0 80px rgba(59,160,192,.06)}
+.ad-video{display:block;width:100%;height:auto;background:#000}
+.ad-cap{margin:32px auto 0;max-width:560px;text-align:center;font-size:10px;color:var(--t3);font-family:var(--mono);letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+
 /* EVIDENCE BAR */
 .ev-bar{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);padding:72px 0;background:var(--bg2);position:relative;z-index:1;overflow:hidden}
 .ev-bar::before{content:'';position:absolute;top:0;left:25%;right:25%;height:1px;background:linear-gradient(90deg,transparent,rgba(224,160,32,.08),transparent)}
@@ -134,6 +167,12 @@ section{padding:180px 0;position:relative}
 .fc:hover .fc-icon{filter:drop-shadow(0 0 10px rgba(59,160,192,.3));transform:translateY(-2px)}
 .fc h3{font-size:16px;font-weight:500;margin-bottom:14px;letter-spacing:-.01em}
 .fc p{font-size:14px;color:var(--t2);line-height:1.85}
+.fc--wide{grid-column:1/-1;display:grid;grid-template-columns:auto auto 1fr;column-gap:36px;row-gap:4px;align-items:center;padding:48px 56px;background:linear-gradient(180deg,rgba(59,160,192,.045),rgba(59,160,192,0) 65%),var(--bg)}
+.fc--wide:hover{background:linear-gradient(180deg,rgba(59,160,192,.08),rgba(59,160,192,0) 65%),rgba(17,30,42,.6)}
+.fc--wide .fc-icon{margin-bottom:0;grid-row:1/3;align-self:center}
+.fc--wide .fc-flag{grid-column:2;grid-row:1;align-self:end;justify-self:start;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);opacity:.85;padding:3px 8px;border:1px solid rgba(59,160,192,.25);border-radius:999px;background:rgba(59,160,192,.06)}
+.fc--wide h3{margin-bottom:0;font-size:18px;grid-column:2;grid-row:2;align-self:start}
+.fc--wide p{grid-column:3;grid-row:1/3;margin:0;max-width:640px;align-self:center}
 
 /* ================================================================
    HANDS-OFF AUTOMATION — rebuilt
@@ -704,7 +743,8 @@ section{padding:180px 0;position:relative}
 
 /* FILE TYPES */
 .ft{background:var(--bg)}
-.ft-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:56px;margin-top:88px}
+.ft-groups{display:flex;flex-wrap:wrap;justify-content:center;gap:56px;margin-top:88px}
+.ft-group{flex:0 1 calc(25% - 42px);min-width:0}
 .ft-group h4{font-size:11px;font-weight:500;margin-bottom:24px;color:var(--t2);letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
 .ft-list{display:flex;flex-wrap:wrap;gap:6px}
 .ft-tag{font-family:var(--mono);font-size:11px;color:var(--cyan);opacity:.55;background:rgba(59,160,192,.02);padding:6px 12px;border-radius:4px;border:1px solid rgba(59,160,192,.05);transition:all .25s var(--ease);cursor:default}
@@ -729,7 +769,15 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .prob-top{gap:72px}
   .arch-grid{gap:64px}
   .ev-row{gap:56px}
+  .ad{padding:100px 0 60px}
+  .ad .w{padding:0 36px}
+  .ad-frame{border-radius:12px}
   .fc{padding:48px 32px}
+  .fc--wide{grid-template-columns:auto 1fr;column-gap:28px;row-gap:8px;padding:40px 36px;align-items:start}
+  .fc--wide .fc-icon{grid-row:1/4;align-self:start;margin-top:4px}
+  .fc--wide .fc-flag{grid-column:2;grid-row:1;align-self:start}
+  .fc--wide h3{grid-column:2;grid-row:2;align-self:start;font-size:17px}
+  .fc--wide p{grid-column:2;grid-row:3;align-self:start;max-width:none}
   .ucc{padding:44px 40px}
   .pc{padding:44px 36px}
   .ig-card{padding:44px 32px}
@@ -768,6 +816,11 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .interlude-orb{width:300px;height:200px}
   .cta-orb{width:300px;height:200px}
 
+  .ad{padding:80px 0 50px}
+  .ad .w{padding:0 20px}
+  .ad-frame{border-radius:10px}
+  .ad-cap{font-size:9px;letter-spacing:.16em;margin-top:24px}
+
   .ev-bar{padding:48px 0}
   .ev-row{gap:32px 56px;justify-content:center;align-items:center}
   .ev-num{font-size:40px}
@@ -777,13 +830,19 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .prob-top{grid-template-columns:1fr;gap:48px}
   .prob-grid{grid-template-columns:1fr}
   .fg{grid-template-columns:1fr}
+  .fc--wide{grid-template-columns:1fr;column-gap:0;row-gap:12px;padding:40px 28px;align-items:start}
+  .fc--wide .fc-icon{grid-row:auto;align-self:start;margin-top:0;margin-bottom:24px}
+  .fc--wide h3{grid-column:1;grid-row:auto;font-size:16px}
+  .fc--wide .fc-flag{grid-column:1;grid-row:auto;align-self:start;margin-bottom:4px}
+  .fc--wide p{grid-column:1;grid-row:auto;max-width:none}
   .interlude-grid{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr;gap:56px}
   .steps::before{display:none}
   .arch-grid{grid-template-columns:1fr;gap:56px}
   .uc-grid{grid-template-columns:1fr}
   .price-split{gap:40px}
-  .ft-groups{grid-template-columns:repeat(2,1fr);gap:36px}
+  .ft-groups{gap:36px}
+  .ft-group{flex:0 1 calc(50% - 18px)}
 
   .title{font-size:28px;letter-spacing:-.03em;margin-bottom:20px}
 
@@ -820,6 +879,9 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .w{padding:0 20px}
   section{padding:96px 0}
 
+  .ad{padding:64px 0 40px}
+  .ad-frame{border-radius:8px}
+
   .hero h1{font-size:40px;margin-bottom:28px}
   .hero-sub{font-size:14px;max-width:360px}
   .hero-chip{font-size:8px;padding:6px 14px;margin-bottom:32px}
@@ -838,6 +900,8 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .pc{padding:32px 24px}
   .pc-icon{width:24px;height:24px;margin-bottom:20px}
   .fc{padding:36px 24px}
+  .fc--wide{padding:36px 24px}
+  .fc--wide h3{font-size:16px}
   .fc-icon{margin-bottom:24px}
 
   .automation-points{gap:8px}
@@ -864,7 +928,8 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .stp-n{width:76px;height:76px;font-size:12px;margin-bottom:24px}
   .stp h3{font-size:16px}
 
-  .ft-groups{grid-template-columns:1fr;gap:32px}
+  .ft-groups{gap:32px}
+  .ft-group{flex:0 1 100%}
   .ft-group h4{margin-bottom:16px}
 
   .price-card{padding:36px 24px}
@@ -946,6 +1011,21 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <p class="hero-platforms">Windows<span>·</span>macOS<span>·</span>Linux</p>
   </div>
   <div class="scroll-cue"><div class="scroll-bar"></div><span>Scroll</span></div>
+</section>
+
+<!-- PRODUCT AD -->
+<section class="ad" aria-label="StratoSort in action">
+  <div class="w">
+    <div class="ad-frame" data-r>
+      <video class="ad-video" id="adVideo"
+             autoplay muted loop playsinline controls preload="metadata"
+             poster="assets/strato-ad-poster.jpg">
+        <source src="assets/strato-ad.mp4" type="video/mp4">
+        <p style="padding:32px;color:#fff">Your browser does not support embedded video. <a href="assets/strato-ad.mp4" style="color:#3ba0c0">Download the demo</a> to view.</p>
+      </video>
+    </div>
+    <p class="ad-cap" data-r data-d="150">See it run on your hardware.</p>
+  </div>
 </section>
 
 <!-- EVIDENCE BAR -->
@@ -1031,7 +1111,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <div class="feat-intro" data-r>
       <p class="label">Capabilities</p>
       <h2 class="title">Understand your own work beyond what keyword search <em>can see.</em></h2>
-      <p class="desc" style="margin:0 auto">StratoSort reads the content of your files — not just filenames — using AI that runs entirely on your hardware.</p>
+      <p class="desc" style="margin:0 auto">StratoSort reads the content of your files — text, images, and now audio and video — not just filenames — using AI that runs entirely on your hardware.</p>
     </div>
     <div class="fg" data-r data-d="100">
       <div class="fc">
@@ -1063,6 +1143,12 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
         <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
         <h3>Full Undo / Redo</h3>
         <p>File moves and renames are reversible with a reviewable action history, so you can inspect and roll back changes confidently.</p>
+      </div>
+      <div class="fc fc--wide">
+        <svg class="fc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+        <span class="fc-flag">New</span>
+        <h3>Audio &amp; Video Transcription</h3>
+        <p>Search meeting recordings, voice memos, and video by what was said. Whisper runs locally on your machine — transcripts are indexed alongside your documents, never uploaded.</p>
       </div>
     </div>
   </div>
@@ -1275,13 +1361,13 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
       <div class="ucc" data-r data-d="100">
         <div class="ucc-role">Legal</div>
         <h3>Find the clause across 10,000 files.</h3>
-        <p>Search case files, contracts, and discovery materials by meaning. Surface relevant precedent without remembering filenames while keeping analysis on infrastructure you control.</p>
+        <p>Search case files, contracts, and discovery materials by meaning. Surface relevant precedent without remembering filenames while keeping analysis on infrastructure you control. Search depositions and recorded interviews by what was said, not just filenames.</p>
         <div class="ucc-stat">42% of legal professionals spend 2–5 hrs/day on admin tasks — LEAP, 2026</div>
       </div>
       <div class="ucc" data-r data-d="200">
         <div class="ucc-role">Research</div>
         <h3>Query your literature archive in plain language.</h3>
-        <p>Ask "which papers discuss transformer attention applied to genomics" across years of PDFs. Get grounded answers with source citations from your own collection.</p>
+        <p>Ask "which papers discuss transformer attention applied to genomics" across years of PDFs. Get grounded answers with source citations from your own collection. Query recorded interviews and lecture audio alongside your PDF library.</p>
         <div class="ucc-stat">90% of time creating "new" reports is spent recreating existing work — IDC</div>
       </div>
       <div class="ucc" data-r data-d="300">
@@ -1307,12 +1393,15 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   <div class="w">
     <div data-r>
       <p class="label">Compatibility</p>
-      <h2 class="title">60+ file types. <em>One index.</em></h2>
+      <h2 class="title">70+ file types. <em>One index.</em></h2>
     </div>
     <div class="ft-groups" data-r data-d="100">
-      <div class="ft-group"><h4>Documents</h4><div class="ft-list"><span class="ft-tag">.pdf</span><span class="ft-tag">.docx</span><span class="ft-tag">.doc</span><span class="ft-tag">.xlsx</span><span class="ft-tag">.pptx</span><span class="ft-tag">.odt</span><span class="ft-tag">.epub</span><span class="ft-tag">.eml</span><span class="ft-tag">.msg</span></div></div>
-      <div class="ft-group"><h4>Code and Data</h4><div class="ft-list"><span class="ft-tag">.py</span><span class="ft-tag">.js</span><span class="ft-tag">.ts</span><span class="ft-tag">.json</span><span class="ft-tag">.csv</span><span class="ft-tag">.sql</span><span class="ft-tag">.yaml</span><span class="ft-tag">.xml</span><span class="ft-tag">.md</span></div></div>
-      <div class="ft-group"><h4>Images</h4><div class="ft-list"><span class="ft-tag">.jpg</span><span class="ft-tag">.png</span><span class="ft-tag">.gif</span><span class="ft-tag">.webp</span><span class="ft-tag">.svg</span><span class="ft-tag">.tiff</span><span class="ft-tag">.heic</span><span class="ft-tag">.bmp</span></div></div>
+      <div class="ft-group"><h4>Documents</h4><div class="ft-list"><span class="ft-tag">.pdf</span><span class="ft-tag">.docx</span><span class="ft-tag">.doc</span><span class="ft-tag">.xlsx</span><span class="ft-tag">.xls</span><span class="ft-tag">.pptx</span><span class="ft-tag">.ppt</span><span class="ft-tag">.odt</span><span class="ft-tag">.ods</span><span class="ft-tag">.odp</span><span class="ft-tag">.epub</span><span class="ft-tag">.eml</span><span class="ft-tag">.msg</span><span class="ft-tag">.kml</span><span class="ft-tag">.kmz</span></div></div>
+      <div class="ft-group"><h4>Code and Data</h4><div class="ft-list"><span class="ft-tag">.py</span><span class="ft-tag">.js</span><span class="ft-tag">.ts</span><span class="ft-tag">.json</span><span class="ft-tag">.csv</span><span class="ft-tag">.sql</span><span class="ft-tag">.yaml</span><span class="ft-tag">.xml</span><span class="ft-tag">.md</span><span class="ft-tag">.txt</span><span class="ft-tag">.rtf</span><span class="ft-tag">.html</span><span class="ft-tag">.css</span><span class="ft-tag">.java</span><span class="ft-tag">.c</span><span class="ft-tag">.cpp</span><span class="ft-tag">.h</span><span class="ft-tag">.rb</span><span class="ft-tag">.go</span><span class="ft-tag">.rs</span><span class="ft-tag">.php</span><span class="ft-tag">.sh</span><span class="ft-tag">.ps1</span><span class="ft-tag">.ini</span><span class="ft-tag">.log</span></div></div>
+      <div class="ft-group"><h4>Images</h4><div class="ft-list"><span class="ft-tag">.jpg</span><span class="ft-tag">.jpeg</span><span class="ft-tag">.png</span><span class="ft-tag">.gif</span><span class="ft-tag">.webp</span><span class="ft-tag">.svg</span><span class="ft-tag">.tiff</span><span class="ft-tag">.heic</span><span class="ft-tag">.bmp</span><span class="ft-tag">.ico</span></div></div>
+      <div class="ft-group"><h4>Audio</h4><div class="ft-list"><span class="ft-tag">.mp3</span><span class="ft-tag">.wav</span><span class="ft-tag">.m4a</span><span class="ft-tag">.flac</span><span class="ft-tag">.aac</span><span class="ft-tag">.ogg</span></div></div>
+      <div class="ft-group"><h4>Video</h4><div class="ft-list"><span class="ft-tag">.mp4</span><span class="ft-tag">.mov</span><span class="ft-tag">.mkv</span><span class="ft-tag">.webm</span><span class="ft-tag">.avi</span><span class="ft-tag">.wmv</span></div></div>
+      <div class="ft-group"><h4>3D and Design</h4><div class="ft-list"><span class="ft-tag">.stl</span><span class="ft-tag">.obj</span><span class="ft-tag">.3mf</span><span class="ft-tag">.ai</span><span class="ft-tag">.eps</span><span class="ft-tag">.psd</span></div></div>
       <div class="ft-group"><h4>Archives</h4><div class="ft-list"><span class="ft-tag">.zip</span><span class="ft-tag">.rar</span><span class="ft-tag">.7z</span><span class="ft-tag">.tar</span><span class="ft-tag">.gz</span><span class="ft-tag">.bz2</span></div></div>
     </div>
   </div>
@@ -1794,6 +1883,25 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
       // Nothing complex needed — next cycle re-reads positions fresh
     },120);
   });
+})();
+
+// ===== AD VIDEO: respect reduced motion + pause when off-screen =====
+(function(){
+  const v=document.getElementById('adVideo');
+  if(!v)return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    v.removeAttribute('autoplay');
+    v.pause();
+    return;
+  }
+  if(!('IntersectionObserver' in window))return;
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){v.play().catch(()=>{});}
+      else{v.pause();}
+    });
+  },{threshold:.25});
+  io.observe(v);
 })();
 </script>
 </body>
