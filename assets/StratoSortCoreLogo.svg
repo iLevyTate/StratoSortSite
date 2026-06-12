@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4096 4096" width="4096" height="4096">
+  <defs>
+    <clipPath id="discClip">
+      <circle cx="2048" cy="2048" r="2016"/>
+    </clipPath>
+  </defs>
+
+  <!-- background (also fills the two slits between bands) -->
+  <rect x="0" y="0" width="4096" height="4096" fill="#000000"/>
+
+  <!-- colored bands, clipped to the circle -->
+  <g clip-path="url(#discClip)">
+    <!-- amber: circle top down to first slit (0 -> 975) -->
+    <rect x="0" y="0" width="4096" height="975" fill="#DD9F2E"/>
+
+    <!-- mid blue band (1147 -> 1962) -->
+    <rect x="0" y="1147" width="4096" height="815" fill="#21769F"/>
+
+    <!-- dark blue band (2133 -> bottom) -->
+    <rect x="0" y="2133" width="4096" height="1963" fill="#014366"/>
+  </g>
+</svg>

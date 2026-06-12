@@ -144,8 +144,8 @@ body::after{content:'';position:fixed;inset:0;z-index:10000;pointer-events:none;
 
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:rgba(7,12,18,.9);border-bottom:1px solid var(--b1)}
 nav .w{display:flex;align-items:center;justify-content:space-between;height:100%}
-.nav-mark{text-decoration:none;color:var(--t1);font-weight:500;font-size:14px;letter-spacing:.1em;text-transform:uppercase;position:relative;padding-left:0}
-.nav-mark::after{content:'Core';font-size:8px;font-family:var(--mono);color:var(--t3);letter-spacing:.14em;position:absolute;bottom:-1px;right:-38px;opacity:.5}
+.nav-mark{display:flex;align-items:center;text-decoration:none}
+.nav-mark img{display:block;height:32px;width:auto}
 .nav-r{display:flex;align-items:center;gap:44px;list-style:none}
 .nav-r a{color:var(--t3);text-decoration:none;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:color .25s;position:relative}
 .nav-r a::after{content:'';position:absolute;bottom:-6px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .4s var(--ease);transform-origin:left}
@@ -1026,8 +1026,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
   .ap h4{font-size:15px}
   .ap p{font-size:13px}
 
-  .nav-mark{font-size:13px}
-  .nav-mark::after{display:none}
+  .nav-mark img{height:28px}
 
   .footer-co{font-size:9px}
 }
@@ -1057,7 +1056,9 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
 
 <nav aria-label="Primary">
   <div class="w">
-    <a href="/" class="nav-mark" aria-label="StratoSort home">StratoSort</a>
+    <a href="/" class="nav-mark" aria-label="StratoSort home">
+      <img src="/assets/StratoSortCoreLogo.svg" alt="" />
+    </a>
     <ul class="nav-r" id="navR">
       <li><a href="#features">Features</a></li>
       <li><a href="#architecture">Architecture</a></li>
