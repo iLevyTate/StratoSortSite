@@ -104,11 +104,13 @@
       "url": "https://stratosort.com/",
       "image": "https://stratosort.com/assets/og-image.png",
       "publisher": { "@id": "https://stratosort.com/#org" },
+      "license": "https://polyformproject.org/licenses/noncommercial/1.0.0/",
+      "downloadUrl": "https://github.com/iLevyTate/StratoSortCore/releases",
       "offers": {
         "@type": "Offer",
-        "price": "99",
+        "price": "0",
         "priceCurrency": "USD",
-        "category": "Annual subscription"
+        "category": "Free for personal and noncommercial use under PolyForm Noncommercial 1.0.0; commercial licenses sold separately"
       }
     }
   ]
@@ -760,8 +762,9 @@ section{padding:180px 0;position:relative}
 
 .how{background:var(--bg)}
 .how-intro{text-align:center;max-width:540px;margin:0 auto 100px}
-.beta-tag{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(224,160,32,.18);padding:8px 18px;border-radius:100px;background:rgba(224,160,32,.025)}
-.beta-tag-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px rgba(224,160,32,.45);animation:pd 3.2s ease infinite}
+.stp p a,.price-context p a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(59,160,192,.3)}
+.rel-tag{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;border:1px solid rgba(224,160,32,.18);padding:8px 18px;border-radius:100px;background:rgba(224,160,32,.025)}
+.rel-tag-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 10px rgba(224,160,32,.45);animation:pd 3.2s ease infinite}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);position:relative}
 .steps::before{content:'';position:absolute;top:52px;left:calc(100%/6);width:calc(100%*4/6);height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.15}
 .stp{text-align:center;padding:0 24px;position:relative}
@@ -801,8 +804,8 @@ section{padding:180px 0;position:relative}
 .price-card:hover{border-color:rgba(224,160,32,.25);box-shadow:0 24px 80px rgba(0,0,0,.3),0 0 0 1px rgba(224,160,32,.06)}
 .price-card::before{content:'';position:absolute;top:-1px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.25}
 .price-cards .price-card{height:100%}
-.price-card--beta{border-color:rgba(59,160,192,.2);background:linear-gradient(180deg,rgba(59,160,192,.03) 0%,transparent 45%)}
-.price-card--beta::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.35}
+.price-card--commercial{border-color:rgba(59,160,192,.2);background:linear-gradient(180deg,rgba(59,160,192,.03) 0%,transparent 45%)}
+.price-card--commercial::before{background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.35}
 .price-name{font-size:12px;color:var(--t2);margin-bottom:20px;letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono)}
 .price-amt{font-size:72px;font-weight:500;letter-spacing:-.05em;margin-bottom:4px;line-height:1}
 .price-per{font-family:var(--mono);font-size:12px;color:var(--t3);margin-bottom:52px;letter-spacing:.04em}
@@ -1374,13 +1377,13 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <div class="how-intro" data-r>
       <p class="label">Setup</p>
       <h2 class="title">Running in three steps.<br><em>No terminal required.</em></h2>
-      <p class="beta-tag" role="status"><span class="beta-tag-dot" aria-hidden="true"></span>Private beta &middot; open applications closed &middot; installer ships to approved testers</p>
+      <p class="rel-tag" role="status"><span class="rel-tag-dot" aria-hidden="true"></span>Public release &middot; source available &middot; installers on GitHub Releases</p>
     </div>
     <div class="steps">
       <div class="stp" data-r data-d="100">
         <div class="stp-n">01</div>
         <h3>Download the installer</h3>
-        <p>One file for Windows or macOS. No Python, Docker, API keys, or command line.</p>
+        <p>One file for Windows, macOS, or Linux from <a href="https://github.com/iLevyTate/StratoSortCore/releases" rel="noopener noreferrer">GitHub Releases</a>. No Python, Docker, API keys, or command line.</p>
       </div>
       <div class="stp" data-r data-d="200">
         <div class="stp-n">02</div>
@@ -1478,43 +1481,45 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <div class="price-split">
       <div class="price-lead" data-r>
         <p class="label">Pricing</p>
-        <h2 class="title"><em>One license.</em><br>No per-seat.<br>No tiers.</h2>
-        <p class="desc">$99 per year for the full product. Every feature, unlimited files, no usage caps. One price because the architecture is simple — and your budget should be too.</p>
+        <h2 class="title"><em>Free for personal use.</em><br>Paid for commercial use.<br>Source available.</h2>
+        <p class="desc">StratoSort Core is released under the PolyForm Noncommercial 1.0.0 license. Personal and other noncommercial use is free, with every feature included. Commercial use requires a separate paid license from Kennedy Applied Sciences, Inc.</p>
       </div>
       <div class="price-cards" data-r data-d="200">
           <div class="price-card">
-            <div class="price-name">Professional License</div>
-            <div class="price-amt">$99</div>
-            <div class="price-per">/ year</div>
+            <div class="price-name">Personal &amp; Noncommercial</div>
+            <div class="price-amt">Free</div>
+            <div class="price-per">/ PolyForm Noncommercial 1.0.0</div>
             <ul class="price-list">
               <li>All features included</li>
               <li>Unlimited file indexing</li>
               <li>Semantic search and document chat</li>
               <li>Knowledge graph visualization</li>
               <li>Vision and OCR processing</li>
-              <li>Licensed for commercial use</li>
+              <li>Windows, macOS, and Linux builds</li>
+              <li>Source code published on GitHub</li>
+            </ul>
+            <a class="price-btn" href="https://github.com/iLevyTate/StratoSortCore/releases" rel="noopener noreferrer">Download from GitHub Releases</a>
+            <div class="price-context">
+              <p>Noncommercial use is defined by the <a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" rel="noopener noreferrer">PolyForm Noncommercial 1.0.0</a> license text. Source: <a href="https://github.com/iLevyTate/StratoSortCore" rel="noopener noreferrer">github.com/iLevyTate/StratoSortCore</a>.</p>
+            </div>
+          </div>
+          <div class="price-card price-card--commercial">
+            <div class="price-name">Commercial License</div>
+            <div class="price-amt">Per seat</div>
+            <div class="price-per">/ quoted by email</div>
+            <ul class="price-list">
+              <li>Required for company use, paid products, and services</li>
+              <li>Signed offline license key, verified on your device</li>
+              <li>No account server, no phone-home</li>
+              <li>Seat count and update window set on the key</li>
+              <li>Same build and features as the free release</li>
               <li>Designed for strict data-handling environments</li>
               <li>Priority issue support</li>
               <li>Invoice for expense reporting</li>
             </ul>
-            <a class="price-btn" href="mailto:kennedyappliedsciences@gmail.com?subject=StratoSort%20License%20Purchase&amp;body=Hi%20%E2%80%94%20I%27d%20like%20to%20purchase%20a%20StratoSort%20Professional%20license.%0A%0ARole%3A%0APlatform%20(Windows%2FmacOS%2FLinux)%3A%0ASeats%3A%0A">Request a license</a>
+            <a class="price-btn" href="mailto:contact@kennedyappliedsciences.com?subject=StratoSort%20Core%20commercial%20license%20inquiry&amp;body=Please%20send%20a%20quote%20for%20a%20commercial%20license.%0A%0A-%20Organization%20name%3A%0A-%20Number%20of%20seats%3A%0A-%20License%20for%3A%20packaged%20app%20%2F%20source%20%2F%20both%0A">Request a commercial license</a>
             <div class="price-context">
-              <p>IDC estimates document challenges cost $10,661 per worker per year. StratoSort costs less than a single hour of that loss.</p>
-            </div>
-          </div>
-          <div class="price-card price-card--beta">
-            <div class="price-name">Beta Tester Access</div>
-            <div class="price-amt">Closed</div>
-            <div class="price-per">/ applications paused</div>
-            <ul class="price-list">
-              <li>Open applications closed earlier in July 2026</li>
-              <li>Current testers keep full access</li>
-              <li>Join the waitlist for the next cohort</li>
-              <li>We&rsquo;ll email you when applications reopen</li>
-            </ul>
-            <a class="price-btn" href="mailto:kennedyappliedsciences@gmail.com?subject=StratoSort%20Beta%20Waitlist&amp;body=Hi%20%E2%80%94%20please%20add%20me%20to%20the%20StratoSort%20beta%20waitlist.%0A%0ARole%3A%0APlatform%20(Windows%2FmacOS%2FLinux)%3A%0ATop%20use%20case%3A%0A">Join the waitlist</a>
-            <div class="price-context">
-              <p>Open beta applications closed earlier this month. This page was updated to reflect that later than intended &mdash; the delay was an accidental oversight, not a change in the program. Join the waitlist and we&rsquo;ll notify you when the next cohort opens.</p>
+              <p>The app runs a 14-day trial for new AI work, then asks for a personal-use declaration or a commercial key. The personal-use declaration is not a substitute for a commercial license.</p>
             </div>
           </div>
       </div>
@@ -1529,7 +1534,7 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
     <div data-r>
       <p class="label">Get started</p>
       <h2 class="title">One installer. Local-first by design.<br><em>Built for control without cloud dependency.</em></h2>
-      <p class="desc" style="margin:0 auto">Your files stay on your machine and your knowledge becomes searchable. $99 per year — every feature included.</p>
+      <p class="desc" style="margin:0 auto">Your files stay on your machine and your knowledge becomes searchable. Free for personal use, with every feature included.</p>
     </div>
   </div>
 </section>
@@ -1543,7 +1548,8 @@ footer::before{content:'';position:absolute;top:0;left:30%;right:30%;height:1px;
       <div class="footer-links">
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a href="mailto:kennedyappliedsciences@gmail.com">Contact</a>
+        <a href="https://github.com/iLevyTate/StratoSortCore" rel="noopener noreferrer">GitHub</a>
+        <a href="mailto:contact@kennedyappliedsciences.com">Contact</a>
       </div>
     </div>
   </div>
