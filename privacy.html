@@ -64,7 +64,7 @@ ul li{margin-bottom:8px}
   <ul>
     <li>Model files are downloaded once from a public model registry during first-run setup. Those downloads are subject to that registry's own policies.</li>
     <li>Cloud AI providers (OpenAI, Anthropic, Groq, DeepSeek) are off by default. If you add your own API key and select one in Settings, the text you send for analysis or chat goes to that provider under its own terms. We never receive it.</li>
-    <li>Automatic update checks are off by default. If they are enabled, the app fetches release metadata from GitHub; no document data is included.</li>
+    <li>Installed copies check GitHub Releases for app updates at startup and every few hours. Only release metadata is fetched; no document data is included. You can turn background checks off in Settings &rarr; Application.</li>
     <li>Every network connection the app can make is listed, with source references, in <a href="https://github.com/iLevyTate/StratoSortStack/blob/main/docs/NETWORK_TRANSPARENCY.md" rel="noopener noreferrer">NETWORK_TRANSPARENCY.md</a>.</li>
     <li>The app does not include analytics, telemetry, crash reporters, or feature-flag SDKs that phone home.</li>
   </ul>
