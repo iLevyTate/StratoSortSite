@@ -50,7 +50,7 @@ ul li{margin-bottom:8px}
 <main class="w">
   <a class="crumb" href="/">StratoSort</a>
   <h1>Privacy <em>Policy</em></h1>
-  <p class="updated">Last updated · 26 September 2026</p>
+  <p class="updated">Last updated · 26 October 2026</p>
 
   <div class="callout">
     <p>The short version: the StratoSort desktop application runs on your machine. We do not transmit, index, store, or analyze the documents you point it at. This policy covers the limited information collected through the website, through public-release support and commercial-license requests, and through the public source repository.</p>
@@ -63,7 +63,9 @@ ul li{margin-bottom:8px}
   <p>In standard configuration, the StratoSort desktop application performs file indexing, embedding generation, vector search, and LLM inference entirely on your device. <strong>Document content, file paths, embeddings, and search queries do not leave your machine</strong> in that configuration.</p>
   <ul>
     <li>Model files are downloaded once from a public model registry during first-run setup. Those downloads are subject to that registry's own policies.</li>
-    <li>If you enable any optional cloud feature in a future release, that feature will be opt-in and described in-app before it transmits anything.</li>
+    <li>Cloud AI providers (OpenAI, Anthropic, Groq, DeepSeek) are off by default. If you add your own API key and select one in Settings, the text you send for analysis or chat goes to that provider under its own terms. We never receive it.</li>
+    <li>Automatic update checks are off by default. If they are enabled, the app fetches release metadata from GitHub; no document data is included.</li>
+    <li>Every network connection the app can make is listed, with source references, in <a href="https://github.com/iLevyTate/StratoSortStack/blob/main/docs/NETWORK_TRANSPARENCY.md" rel="noopener noreferrer">NETWORK_TRANSPARENCY.md</a>.</li>
     <li>The app does not include analytics, telemetry, crash reporters, or feature-flag SDKs that phone home.</li>
   </ul>
 
