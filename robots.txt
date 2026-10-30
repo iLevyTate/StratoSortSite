@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://stratosort.com/sitemap.xml
+Sitemap: https://stratosort.com/docs/sitemap.xml

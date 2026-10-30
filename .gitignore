@@ -16,3 +16,7 @@ desktop.ini
 
 # Local logs
 *.log
+
+# Build output and dependencies
+node_modules/
+_site/

@@ -1,7 +1,7 @@
 # Deploys stratosort.com: the static landing pages in this repo at /, plus the
-# StratoSort Stack documentation (iLevyTate/StratoSortStack docs/, a Jekyll
-# site) built at /docs. The docs stay authored in the app repo; this workflow
-# only builds and publishes them.
+# StratoSort Stack documentation rendered at /docs. The docs stay authored as
+# Markdown in iLevyTate/StratoSortStack docs/; scripts/build-docs.mjs turns
+# them into plain HTML in this site's design (no Jekyll).
 #
 # Requires Settings -> Pages -> Source = "GitHub Actions". The custom domain
 # (stratosort.com) is kept by the Pages settings, not the CNAME file.
@@ -41,25 +41,28 @@ jobs:
           path: stack
           sparse-checkout: docs
 
-      - name: Point the docs at stratosort.com/docs
-        # The committed config targets the repo's own github.io Pages site.
-        run: |
-          set -euo pipefail
-          cfg=stack/docs/_config.yml
-          sed -i -E "s|^url:.*|url: 'https://stratosort.com'|; s|^baseurl:.*|baseurl: '/docs'|" "$cfg"
-          grep -qx "url: 'https://stratosort.com'" "$cfg"
-          grep -qx "baseurl: '/docs'" "$cfg"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install build dependencies
+        working-directory: site
+        run: npm ci
 
       - name: Stage landing pages
+        working-directory: site
         run: |
-          mkdir -p _site
-          rsync -a --exclude '.git' --exclude '.github' site/ _site/
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/_site"
+          # Tracked files only, minus build tooling.
+          git ls-files -z | grep -zvE '^(\.github/|scripts/|package(-lock)?\.json$|\.gitignore$)' \
+            | xargs -0 cp --parents -t "$GITHUB_WORKSPACE/_site"
 
       - name: Build docs
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./stack/docs
-          destination: ./_site/docs
+        run: node site/scripts/build-docs.mjs --src stack/docs --out _site/docs
 
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
