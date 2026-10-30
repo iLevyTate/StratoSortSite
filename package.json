@@ -1,0 +1,16 @@
+{
+  "name": "stratosort-site",
+  "private": true,
+  "description": "stratosort.com: static landing pages plus the StratoSort Stack docs rendered from Markdown.",
+  "type": "module",
+  "scripts": {
+    "build:docs": "node scripts/build-docs.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "marked": "18.1.2",
+    "yaml": "2.9.1"
+  }
+}
